@@ -6,18 +6,25 @@
  * @link       https://github.com/flipbox/spark
  */
 
-namespace flipbox\spark\behaviors;
+namespace flipbox\spark\services\traits;
 
+use Craft;
+use flipbox\spark\exceptions\RecordNotFoundException;
+use flipbox\spark\helpers\QueryHelper;
+use flipbox\spark\helpers\RecordHelper;
 use flipbox\spark\models\Model;
 use flipbox\spark\records\Record;
+use yii\db\ActiveQuery;
 
 /**
- * @package flipbox\spark\behaviors
+ * @package flipbox\spark\services\traits
  * @author Flipbox Factory <hello@flipboxfactory.com>
- * @since 1.0.0
+ * @since 1.1.0
  */
-class ModelRecordAccessor extends ObjectRecordAccessor
+trait ModelTrait
 {
+
+    use ObjectTrait;
 
     /*******************************************
      * Model -to- Record

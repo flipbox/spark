@@ -6,57 +6,35 @@
  * @link       https://github.com/flipbox/spark
  */
 
-namespace flipbox\spark\behaviors;
+namespace flipbox\spark\services\traits;
 
 use Craft;
 use flipbox\spark\exceptions\RecordNotFoundException;
 use flipbox\spark\helpers\QueryHelper;
 use flipbox\spark\helpers\RecordHelper;
+use flipbox\spark\models\Model;
 use flipbox\spark\records\Record;
-use yii\base\Behavior;
-use yii\base\InvalidConfigException;
 use yii\db\ActiveQuery;
 
 /**
- * @package flipbox\spark\behaviors
+ * @package flipbox\spark\services\traits
  * @author Flipbox Factory <hello@flipboxfactory.com>
- * @since 1.0.0
+ * @since 1.1.0
  */
-class ObjectRecordAccessor extends Behavior
+trait ObjectTrait
 {
-
-    /**
-     * @var string
-     */
-    public $record;
-
-    /**
-     * @var string
-     */
-    public $instance = Record::class;
-
-    /**
-     * @inheritdoc
-     *
-     * @throws InvalidConfigException if the behavior was not configured properly
-     */
-    public function init()
-    {
-
-        parent::init();
-
-        if ($this->record === null || ($this->instance && $this->record instanceof $this->instance)) {
-            throw new InvalidConfigException('Invalid record class.');
-        }
-
-    }
 
     /**
      * @return string
      */
-    protected function getRecordClass()
+    public abstract static function recordClass(): string;
+
+    /**
+     * @return string
+     */
+    public static function recordClassInstance(): string
     {
-        return $this->record;
+        return Record::class;
     }
 
     /**
@@ -67,7 +45,7 @@ class ObjectRecordAccessor extends Behavior
     {
 
         /** @var Record $recordClass */
-        $recordClass = $this->getRecordClass();
+        $recordClass = $this->recordClass();
 
         $query = $recordClass::find();
 
@@ -97,7 +75,7 @@ class ObjectRecordAccessor extends Behavior
     {
 
         /** @var string $recordClass */
-        $recordClass = $this->getRecordClass();
+        $recordClass = static::recordClass();
 
         /** @var Record $record */
         $record = new $recordClass();

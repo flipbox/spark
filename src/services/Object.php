@@ -14,7 +14,6 @@ use flipbox\spark\helpers\ArrayHelper;
 use flipbox\spark\helpers\ObjectHelper;
 use flipbox\spark\objects\Object as BaseObject;
 use flipbox\spark\Records\Record;
-use flipbox\spark\services\traits\ObjectRecordBehavior;
 use yii\base\Component;
 use yii\base\InvalidConfigException;
 use yii\db\QueryInterface;
@@ -27,7 +26,7 @@ use yii\db\QueryInterface;
 abstract class Object extends Component
 {
 
-    use ObjectRecordBehavior;
+    use traits\ObjectTrait;
 
     /**
      * @var BaseObject[]

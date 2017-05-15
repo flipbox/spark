@@ -14,7 +14,6 @@ use flipbox\spark\helpers\ArrayHelper;
 use flipbox\spark\helpers\ModelHelper;
 use flipbox\spark\models\Model as BaseModel;
 use flipbox\spark\records\Record;
-use flipbox\spark\services\traits\ModelRecordBehavior;
 use yii\base\Component;
 use yii\base\InvalidConfigException;
 use yii\db\QueryInterface;
@@ -27,7 +26,7 @@ use yii\db\QueryInterface;
 abstract class Model extends Component
 {
 
-    use ModelRecordBehavior;
+    use traits\ModelTrait;
 
     /**
      * @var BaseModel[]

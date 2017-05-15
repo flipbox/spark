@@ -6,19 +6,21 @@
  * @link       https://github.com/flipbox/spark
  */
 
-namespace flipbox\spark\behaviors;
+namespace flipbox\spark\services\traits;
 
 use craft\base\Element;
 use craft\base\ElementInterface;
 use flipbox\spark\records\Record;
 
 /**
- * @package flipbox\spark\behaviors
+ * @package flipbox\spark\services\traits
  * @author Flipbox Factory <hello@flipboxfactory.com>
- * @since 1.0.0
+ * @since 1.1.0
  */
-class ElementRecordAccessor extends ObjectRecordAccessor
+trait ElementTrait
 {
+
+    use ObjectTrait;
 
     /*******************************************
      * ELEMENT -to- RECORD
