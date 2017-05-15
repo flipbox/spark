@@ -289,7 +289,7 @@ abstract class ModelByHandle extends Model
         // Get existing record
         if ($model instanceof ModelWithHandle) {
 
-            if ($record = $this->getRecordByCondition([
+            if ($record = $this->findRecordByCondition([
                 'handle' => $model->handle
             ])
             ) {
