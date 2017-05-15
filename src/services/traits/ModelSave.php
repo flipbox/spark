@@ -55,16 +55,9 @@ trait ModelSave
             return false;
         }
 
-        $isNew = (null === $model->id);
-
-        // a 'beforeSave' event
-        if(!$this->beforeSave($model, $isNew)) {
-            return false;
-        }
-
         // Create event
         $event = new ModelEvent([
-            'isNew' => $isNew
+            'isNew' => (null === $model->id)
         ]);
 
         // Db transaction
@@ -133,35 +126,7 @@ trait ModelSave
 
         $transaction->commit();
 
-        // an 'afterSave' event
-        $this->afterSave($model, $isNew);
-
         return true;
-
-    }
-
-    /**
-     * @param Model $model
-     * @param bool $isNew
-     * @return bool
-     */
-    protected function beforeSave(Model $model, bool $isNew): bool
-    {
-        return true;
-    }
-
-    /**
-     * @param Model $model
-     * @param bool $isNew
-     */
-    protected function afterSave(Model $model, bool $isNew)
-    {
-
-        Craft::info(sprintf(
-            "Model '%s' with ID '%s' was saved successfully.",
-            (string) get_class($model),
-            (string) $model->id
-        ), __METHOD__);
 
     }
 

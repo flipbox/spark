@@ -46,11 +46,6 @@ trait ModelDelete
     public function delete(Model $model): bool
     {
 
-        // a 'beforeSave' event
-        if(!$this->beforeDelete($model)) {
-            return false;
-        }
-
         // The event to trigger
         $event = new ModelEvent();
 
@@ -104,33 +99,7 @@ trait ModelDelete
 
         $transaction->commit();
 
-        // an 'afterDelete' event
-        $this->afterDelete($model);
-
         return true;
-
-    }
-
-    /**
-     * @param Model $model
-     * @return bool
-     */
-    protected function beforeDelete(Model $model): bool
-    {
-        return true;
-    }
-
-    /**
-     * @param Model $model
-     */
-    protected function afterDelete(Model $model)
-    {
-
-        Craft::info(sprintf(
-            "Model '%s' with ID '%s' was deleted successfully.",
-            (string) get_class($model),
-            (string) $model->id
-        ), __METHOD__);
 
     }
 
