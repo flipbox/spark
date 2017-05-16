@@ -6,21 +6,18 @@
  * @link       https://github.com/flipbox/spark
  */
 
-namespace flipbox\spark\objects;
-
-use yii\base\Object as BaseObject;
+namespace flipbox\spark\objects\traits;
 
 /**
- * @package flipbox\spark\objects
  * @author Flipbox Factory <hello@flipboxfactory.com>
- * @since 1.0.0
+ * @since 1.2.0
  */
-class Object extends BaseObject
+trait ObjectWithHandle
 {
 
     /**
-     * @var int
+     * @var string
      */
-    public $id;
+    public $handle;
 
 }

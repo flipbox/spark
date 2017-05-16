@@ -14,12 +14,10 @@ use DateTime;
 use flipbox\spark\helpers\RecordHelper;
 
 /**
- * @property int $id
  * @property DateTime $dateCreated
  * @property DateTime $dateUpdated
  * @property string $uid
  *
- * @package flipbox\spark\records
  * @author Flipbox Factory <hello@flipboxfactory.com>
  * @since 1.0.0
  */
@@ -62,13 +60,6 @@ abstract class Record extends BaseRecord
             [
                 [
                     [
-                        'id'
-                    ],
-                    'number',
-                    'integerOnly' => true
-                ],
-                [
-                    [
                         'dateCreated',
                         'dateUpdated'
                     ],
@@ -76,7 +67,6 @@ abstract class Record extends BaseRecord
                 ],
                 [
                     [
-                        'id',
                         'uid',
                         'dateCreated',
                         'dateUpdated'

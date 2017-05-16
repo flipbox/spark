@@ -11,7 +11,6 @@ namespace flipbox\spark\exceptions;
 use yii\base\ErrorException as Exception;
 
 /**
- * @package flipbox\spark\exceptions
  * @author Flipbox Factory <hello@flipboxfactory.com>
  * @since 1.0.0
  */

@@ -8,17 +8,15 @@
 
 namespace flipbox\spark\objects;
 
+use yii\base\Object;
+
 /**
- * @package flipbox\spark\objects
  * @author Flipbox Factory <hello@flipboxfactory.com>
  * @since 1.0.0
  */
 class ObjectWithHandle extends Object
 {
 
-    /**
-     * @var string
-     */
-    public $handle;
+    use traits\ObjectWithHandle;
 
 }

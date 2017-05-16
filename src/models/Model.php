@@ -22,7 +22,6 @@ use yii\base\ModelEvent as ModelDeleteEvent;
  * @property DateTime $dateCreated
  * @property DateTime $dateUpdated
  *
- * @package flipbox\spark\models
  * @author Flipbox Factory <hello@flipboxfactory.com>
  * @since 1.0.0
  */
@@ -30,6 +29,11 @@ abstract class Model extends BaseModel
 {
 
     use DateCreatedAttribute, DateUpdatedAttribute;
+
+    /**
+     * @return bool
+     */
+    abstract public function isNew(): bool;
 
     /**
      * @event ModelEvent an event. You may set
@@ -55,16 +59,10 @@ abstract class Model extends BaseModel
      */
     const EVENT_AFTER_DELETE = 'afterDelete';
 
-
     /**
      * @var string
      */
     public $uid;
-
-    /**
-     * @var integer
-     */
-    public $id;
 
     /**
      * @inheritdoc
@@ -77,13 +75,6 @@ abstract class Model extends BaseModel
             [
                 [
                     [
-                        'id'
-                    ],
-                    'number',
-                    'integerOnly' => true
-                ],
-                [
-                    [
                         'dateCreated',
                         'dateUpdated'
                     ],
@@ -91,8 +82,6 @@ abstract class Model extends BaseModel
                 ],
                 [
                     [
-
-                        'id',
                         'uid',
                         'dateCreated',
                         'dateUpdated'
@@ -132,7 +121,6 @@ abstract class Model extends BaseModel
         return array_merge(
             parent::attributeLabels(),
             [
-                'id' => Craft::t('app', 'ID'),
                 'uid' => Craft::t('app', 'UID'),
                 'dateCreated' => Craft::t('app', 'Date Created'),
                 'dateUpdated' => Craft::t('app', 'Date Updated')
@@ -155,14 +143,6 @@ abstract class Model extends BaseModel
             ]
         );
 
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function getId()
-    {
-        return $this->id;
     }
 
     /**

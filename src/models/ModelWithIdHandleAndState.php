@@ -6,16 +6,16 @@
  * @link       https://github.com/flipbox/spark
  */
 
-namespace flipbox\spark\records;
+namespace flipbox\spark\models;
 
 /**
  * @author Flipbox Factory <hello@flipboxfactory.com>
- * @since 1.0.0
+ * @since 1.2.0
  */
-abstract class RecordWithHandleAndState extends RecordWithHandle
+abstract class ModelWithIdAndHandleAndState extends ModelWithIdAndHandle
 {
 
-    use traits\RecordWithState;
+    use traits\ModelWithState;
 
     /**
      * @inheritdoc
@@ -26,6 +26,19 @@ abstract class RecordWithHandleAndState extends RecordWithHandle
         return array_merge(
             parent::rules(),
             $this->stateRules()
+        );
+
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+
+        return array_merge(
+            parent::attributeLabels(),
+            $this->stateAttributeLabel()
         );
 
     }

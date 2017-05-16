@@ -12,7 +12,6 @@ use craft\helpers\DateTimeHelper;
 use DateTime;
 
 /**
- * @package flipbox\spark\models\traits
  * @author Flipbox Factory <hello@flipboxfactory.com>
  * @since 1.0.0
  */

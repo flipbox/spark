@@ -6,21 +6,17 @@
  * @link       https://github.com/flipbox/spark
  */
 
-namespace flipbox\spark\services;
+namespace flipbox\spark\objects;
+
+use yii\base\Object;
 
 /**
  * @author Flipbox Factory <hello@flipboxfactory.com>
- * @since 1.0.0
+ * @since 1.2.0
  */
-abstract class ModelByHandle extends ModelByString
+class ObjectWithId extends Object
 {
 
-    /**
-     * @inheritdoc
-     */
-    protected function stringProperty(): string
-    {
-        return 'handle';
-    }
+    use traits\ObjectWithId;
 
 }

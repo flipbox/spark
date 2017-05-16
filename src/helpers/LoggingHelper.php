@@ -17,7 +17,6 @@ use yii\log\Dispatcher;
 use yii\log\Logger;
 
 /**
- * @package flipbox\spark\helpers
  * @author Flipbox Factory <hello@flipboxfactory.com>
  * @since 1.0.0
  */

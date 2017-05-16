@@ -12,31 +12,25 @@ use craft\helpers\Json as JsonHelper;
 use flipbox\spark\exceptions\ObjectNotFoundException;
 use flipbox\spark\helpers\ArrayHelper;
 use flipbox\spark\helpers\ObjectHelper;
-use flipbox\spark\objects\Object as BaseObject;
 use flipbox\spark\Records\Record;
 use yii\base\Component;
 use yii\base\InvalidConfigException;
+use yii\base\Object as BaseObject;
 use yii\db\QueryInterface;
 
 /**
- * @package flipbox\spark\services
  * @author Flipbox Factory <hello@flipboxfactory.com>
  * @since 1.0.0
  */
 abstract class Object extends Component
 {
 
-    use traits\ObjectTrait;
+    use traits\Object;
 
     /**
      * @var BaseObject[]
      */
     protected $_cacheAll;
-
-    /**
-     * @var BaseObject[]
-     */
-    protected $_cacheById = [];
 
     /*******************************************
      * OBJECT CLASSES
@@ -190,10 +184,6 @@ abstract class Object extends Component
 
             return $this->findByRecord($identifier, $toScenario);
 
-        } elseif (is_numeric($identifier)) {
-
-            return $this->findById($identifier, $toScenario);
-
         }
 
         return null;
@@ -213,106 +203,6 @@ abstract class Object extends Component
         if (!$object = $this->find($identifier, $toScenario)) {
 
             $this->notFoundException();
-
-        }
-
-        return $object;
-
-    }
-
-    /*******************************************
-     * FIND/GET BY ID
-     *******************************************/
-
-    /**
-     * @param int $id
-     * @param string|null $toScenario
-     * @return BaseObject|null
-     */
-    public function findById(int $id, string $toScenario = null)
-    {
-
-        // Check cache
-        if (!$object = $this->findCacheById($id)) {
-
-            // Find record in db
-            if ($record = $this->findRecordByCondition(
-                ['id' => $id]
-            )
-            ) {
-
-                // Perhaps in cache
-                $object = $this->findByRecord($record, $toScenario);
-
-            } else {
-
-                $this->_cacheById[$id] = null;
-
-                return null;
-
-            }
-
-        }
-
-        return $object;
-
-    }
-
-    /**
-     * @param int $id
-     * @param string|null $toScenario
-     * @return BaseObject
-     * @throws ObjectNotFoundException
-     */
-    public function getById(int $id, string $toScenario = null): BaseObject
-    {
-
-        // Find by ID
-        if (!$object = $this->findById($id, $toScenario)) {
-
-            $this->notFoundByIdException($id);
-
-        }
-
-        return $object;
-
-    }
-
-    /**
-     * @param int $id
-     * @param string|null $toScenario
-     * @return BaseObject|null
-     */
-    public function freshFindById(int $id, string $toScenario = null)
-    {
-
-        // Find record in db
-        if ($record = $this->findRecordByCondition(
-            ['id' => $id]
-        )
-        ) {
-
-            // Create
-            return $this->createFromRecord($record, $toScenario);
-
-        }
-
-        return null;
-
-    }
-
-    /**
-     * @param int $id
-     * @param string|null $toScenario
-     * @return BaseObject
-     * @throws ObjectNotFoundException
-     */
-    public function freshGetById(int $id, string $toScenario = null): BaseObject
-    {
-
-        if (!$object = $this->freshFindById($id, $toScenario)) {
-
-            $this->notFoundByIdException($id);
 
         }
 
@@ -578,63 +468,9 @@ abstract class Object extends Component
 
             return $this->findCacheByRecord($identifier);
 
-        } elseif (is_numeric($identifier)) {
-
-            return $this->findCacheById($identifier);
-
         }
 
         return null;
-
-    }
-
-    /**
-     * Find an existing cache by ID
-     *
-     * @param $id
-     * @return BaseObject|null
-     */
-    public function findCacheById(int $id)
-    {
-
-        // Check if already in addToCache
-        if ($this->isCachedById($id)) {
-
-            return $this->_cacheById[$id];
-
-        }
-
-        return null;
-
-    }
-
-    /**
-     * Identify whether in cache by ID
-     *
-     * @param $id
-     * @return bool
-     */
-    protected function isCachedById(int $id)
-    {
-        return array_key_exists($id, $this->_cacheById);
-    }
-
-    /**
-     * @param BaseObject $object
-     * @return $this
-     */
-    protected function cacheById(BaseObject $object)
-    {
-
-        // Check if already in cache
-        if (!$id = $this->isCachedById($object->id)) {
-
-            // Cache it
-            $this->_cacheById[$id] = $object;
-
-        }
-
-        return $this;
 
     }
 
@@ -644,14 +480,6 @@ abstract class Object extends Component
      */
     public function findCacheByRecord(Record $record)
     {
-
-        // Check if already in addToCache by id
-        if ($id = $this->isCachedById($record->id)) {
-
-            return $this->findCacheById($id);
-
-        }
-
         return null;
     }
 
@@ -661,9 +489,6 @@ abstract class Object extends Component
      */
     public function addToCache(BaseObject $object)
     {
-
-        $this->cacheById($object);
-
         return $this;
     }
 
@@ -681,22 +506,6 @@ abstract class Object extends Component
         throw new ObjectNotFoundException(
             sprintf(
                 "Object does not exist."
-            )
-        );
-
-    }
-
-    /**
-     * @param int|null $id
-     * @throws ObjectNotFoundException
-     */
-    protected function notFoundByIdException(int $id = null)
-    {
-
-        throw new ObjectNotFoundException(
-            sprintf(
-                'Object does not exist with the id "%s".',
-                (string)$id
             )
         );
 

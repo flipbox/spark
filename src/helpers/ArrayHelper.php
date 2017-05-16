@@ -11,7 +11,6 @@ namespace flipbox\spark\helpers;
 use craft\helpers\ArrayHelper as BaseArrayHelper;
 
 /**
- * @package flipbox\spark\helpers
  * @author Flipbox Factory <hello@flipboxfactory.com>
  * @since 1.0.0
  */

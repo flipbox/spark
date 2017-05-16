@@ -14,7 +14,6 @@ use craft\helpers\ElementHelper as BaseElementHelper;
 use yii\base\InvalidConfigException;
 
 /**
- * @package flipbox\spark\helpers
  * @author Flipbox Factory <hello@flipboxfactory.com>
  * @since 1.0.0
  */

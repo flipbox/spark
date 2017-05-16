@@ -8,35 +8,35 @@
 
 namespace flipbox\spark\services\traits;
 
-use Craft;
-use flipbox\spark\exceptions\RecordNotFoundException;
-use flipbox\spark\helpers\QueryHelper;
-use flipbox\spark\helpers\RecordHelper;
-use flipbox\spark\models\Model;
+use flipbox\spark\models\Model as BaseModel;
 use flipbox\spark\records\Record;
-use yii\db\ActiveQuery;
 
 /**
- * @package flipbox\spark\services\traits
  * @author Flipbox Factory <hello@flipboxfactory.com>
- * @since 1.1.0
+ * @since 1.2.0
  */
-trait ModelTrait
+trait Model
 {
 
-    use ObjectTrait;
+    use Object;
 
     /*******************************************
      * Model -to- Record
      *******************************************/
 
     /**
-     * @param Model $model
+     * @param BaseModel $model
+     * @return Record
+     */
+    abstract public function findRecordByModel(BaseModel $model);
+
+    /**
+     * @param BaseModel $model
      * @param Record $record
      * @param bool $mirrorScenario
      * @return void
      */
-    public function transferToRecord(Model $model, Record $record, bool $mirrorScenario = true)
+    public function transferToRecord(BaseModel $model, Record $record, bool $mirrorScenario = true)
     {
 
         if ($mirrorScenario === true) {
@@ -52,20 +52,14 @@ trait ModelTrait
     }
 
     /**
-     * @param Model $model
+     * @param BaseModel $model
      * @param bool $mirrorScenario
      * @return Record
      */
-    public function toRecord(Model $model, bool $mirrorScenario = true): Record
+    public function toRecord(BaseModel $model, bool $mirrorScenario = true): Record
     {
 
-        if ($id = $model->id) {
-            $record = $this->findRecordByCondition(
-                ['id' => $id]
-            );
-        }
-
-        if (empty($record)) {
+        if (!$record = $this->findRecordByModel($model)) {
 
             // Create new record
             $record = $this->createRecord();

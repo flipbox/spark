@@ -8,55 +8,14 @@
 
 namespace flipbox\spark\models;
 
-use Craft;
-use flipbox\spark\helpers\ModelHelper;
-
 /**
- * @package flipbox\spark\models
  * @author Flipbox Factory <hello@flipboxfactory.com>
  * @since 1.0.0
  */
 abstract class ModelWithHandleAndState extends ModelWithHandle
 {
 
-    /**
-     * @var boolean Enabled
-     */
-    public $enabled;
-
-    /**
-     * @inheritdoc
-     */
-    public function isEnabled()
-    {
-        return (bool)$this->enabled;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function isDisabled()
-    {
-        return !$this->isEnabled();
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function toEnabled()
-    {
-        $this->enabled = true;
-        return $this;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function toDisabled()
-    {
-        $this->enabled = false;
-        return $this;
-    }
+    use traits\ModelWithState;
 
     /**
      * @inheritdoc
@@ -66,17 +25,7 @@ abstract class ModelWithHandleAndState extends ModelWithHandle
 
         return array_merge(
             parent::rules(),
-            [
-                [
-                    [
-                        'enabled'
-                    ],
-                    'safe',
-                    'on' => [
-                        ModelHelper::SCENARIO_POPULATE
-                    ]
-                ]
-            ]
+            $this->stateRules()
         );
 
     }
@@ -89,9 +38,7 @@ abstract class ModelWithHandleAndState extends ModelWithHandle
 
         return array_merge(
             parent::attributeLabels(),
-            [
-                'state' => Craft::t('app', 'State')
-            ]
+            $this->stateAttributeLabel()
         );
 
     }

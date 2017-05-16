@@ -15,7 +15,6 @@ use yii\db\QueryInterface;
 use yii\db\Transaction;
 
 /**
- * @package flipbox\spark\helpers
  * @author Flipbox Factory <hello@flipboxfactory.com>
  * @since 1.0.0
  */

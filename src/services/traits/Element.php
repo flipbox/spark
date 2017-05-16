@@ -8,19 +8,18 @@
 
 namespace flipbox\spark\services\traits;
 
-use craft\base\Element;
+use craft\base\Element as BaseElement;
 use craft\base\ElementInterface;
 use flipbox\spark\records\Record;
 
 /**
- * @package flipbox\spark\services\traits
  * @author Flipbox Factory <hello@flipboxfactory.com>
  * @since 1.1.0
  */
-trait ElementTrait
+trait Element
 {
 
-    use ObjectTrait;
+    use Object;
 
     /*******************************************
      * ELEMENT -to- RECORD
@@ -34,7 +33,7 @@ trait ElementTrait
     public function transferToRecord(ElementInterface $element, Record $record, $mirrorScenario = true)
     {
 
-        /** @var $element Element */
+        /** @var $element BaseElement */
 
         if ($mirrorScenario === true) {
 

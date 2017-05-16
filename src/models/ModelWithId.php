@@ -10,19 +10,19 @@ namespace flipbox\spark\models;
 
 /**
  * @author Flipbox Factory <hello@flipboxfactory.com>
- * @since 1.0.0
+ * @since 1.2.0
  */
-abstract class ModelWithHandle extends Model
+abstract class ModelWithId extends Model
 {
 
-    use traits\ModelWithHandle;
+    use traits\ModelWithId;
 
     /**
      * @return bool
      */
     public function isNew(): bool
     {
-        return null === $this->handle;
+        return null === $this->id;
     }
 
     /**
@@ -33,7 +33,7 @@ abstract class ModelWithHandle extends Model
 
         return array_merge(
             parent::rules(),
-            $this->handleRules()
+            $this->idRules()
         );
 
     }
@@ -46,7 +46,7 @@ abstract class ModelWithHandle extends Model
 
         return array_merge(
             parent::attributeLabels(),
-            $this->handleAttributeLabel()
+            $this->idAttributeLabel()
         );
 
     }

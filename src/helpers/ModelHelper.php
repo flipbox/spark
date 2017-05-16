@@ -12,7 +12,6 @@ use flipbox\spark\models\Model;
 use yii\base\InvalidConfigException;
 
 /**
- * @package flipbox\spark\helpers
  * @author Flipbox Factory <hello@flipboxfactory.com>
  * @since 1.0.0
  */

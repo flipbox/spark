@@ -6,21 +6,28 @@
  * @link       https://github.com/flipbox/spark
  */
 
-namespace flipbox\spark\services;
+namespace flipbox\spark\records;
 
 /**
  * @author Flipbox Factory <hello@flipboxfactory.com>
- * @since 1.0.0
+ * @since 1.2.0
  */
-abstract class ModelByHandle extends ModelByString
+abstract class RecordWithId extends Record
 {
+
+    use traits\RecordWithId;
 
     /**
      * @inheritdoc
      */
-    protected function stringProperty(): string
+    public function rules()
     {
-        return 'handle';
+
+        return array_merge(
+            parent::rules(),
+            $this->idRules()
+        );
+
     }
 
 }

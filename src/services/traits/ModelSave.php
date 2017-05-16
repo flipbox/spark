@@ -12,10 +12,11 @@ use Craft;
 use craft\events\ModelEvent;
 use flipbox\spark\helpers\RecordHelper;
 use flipbox\spark\models\Model;
+use flipbox\spark\models\ModelWithId;
 use flipbox\spark\records\Record;
+use flipbox\spark\records\RecordWithId;
 
 /**
- * @package flipbox\spark\services\traits
  * @author Flipbox Factory <hello@flipboxfactory.com>
  * @since 1.0.0
  */
@@ -55,9 +56,16 @@ trait ModelSave
             return false;
         }
 
+        $isNew = $model->isNew();
+
+        // a 'beforeSave' event
+        if (!$this->beforeSave($model, $isNew)) {
+            return false;
+        }
+
         // Create event
         $event = new ModelEvent([
-            'isNew' => (null === $model->id)
+            'isNew' => $isNew
         ]);
 
         // Db transaction
@@ -98,13 +106,12 @@ trait ModelSave
 
             }
 
-            // Transfer record to model
-            if ($event->isNew) {
-                $model->id = $record->id;
-                $model->dateCreated = $record->dateCreated;
-                $model->uid = $record->uid;
-            }
-            $model->dateUpdated = $record->dateUpdated;
+            // Transfer attributes to model
+            $this->transferFromRecord(
+                $model,
+                $record,
+                $isNew
+            );
 
 
             // The 'after' event
@@ -126,7 +133,57 @@ trait ModelSave
 
         $transaction->commit();
 
+        // an 'afterSave' event
+        $this->afterSave($model, $isNew);
+
         return true;
+
+    }
+
+    /**
+     * @param Model $model
+     * @param bool $isNew
+     * @return bool
+     */
+    protected function beforeSave(Model $model, bool $isNew): bool
+    {
+        return true;
+    }
+
+    /**
+     * @param Model $model
+     * @param bool $isNew
+     */
+    protected function afterSave(Model $model, bool $isNew)
+    {
+
+        Craft::info(sprintf(
+            "Model '%s' was saved successfully.",
+            (string)get_class($model)
+        ), __METHOD__);
+
+    }
+
+    /**
+     * @param Model $model
+     * @param Record $record
+     * @param bool $isNew
+     * @return void
+     */
+    protected function transferFromRecord(Model $model, Record $record, bool $isNew)
+    {
+
+        // Transfer record to model
+        if ($isNew) {
+
+            if ($model instanceof ModelWithId and $record instanceof RecordWithId) {
+                $model->id = $record->id;
+            }
+
+            $model->dateCreated = $record->dateCreated;
+            $model->uid = $record->uid;
+        }
+        $model->dateUpdated = $record->dateUpdated;
 
     }
 

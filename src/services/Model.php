@@ -10,6 +10,7 @@ namespace flipbox\spark\services;
 
 use craft\helpers\Json as JsonHelper;
 use flipbox\spark\exceptions\ModelNotFoundException;
+use flipbox\spark\exceptions\RecordNotFoundException;
 use flipbox\spark\helpers\ArrayHelper;
 use flipbox\spark\helpers\ModelHelper;
 use flipbox\spark\models\Model as BaseModel;
@@ -19,24 +20,18 @@ use yii\base\InvalidConfigException;
 use yii\db\QueryInterface;
 
 /**
- * @package flipbox\spark\services
  * @author Flipbox Factory <hello@flipboxfactory.com>
  * @since 1.0.0
  */
 abstract class Model extends Component
 {
 
-    use traits\ModelTrait;
+    use traits\Model;
 
     /**
      * @var BaseModel[]
      */
     protected $_cacheAll;
-
-    /**
-     * @var BaseModel[]
-     */
-    protected $_cacheById = [];
 
 
     /*******************************************
@@ -193,10 +188,6 @@ abstract class Model extends Component
 
             return $this->findByRecord($identifier, $toScenario);
 
-        } elseif (is_numeric($identifier)) {
-
-            return $this->findById($identifier, $toScenario);
-
         }
 
         return null;
@@ -216,100 +207,6 @@ abstract class Model extends Component
         if (!$model = $this->find($identifier, $toScenario)) {
 
             $this->notFoundException();
-
-        }
-
-        return $model;
-
-    }
-
-    /*******************************************
-     * FIND/GET BY ID
-     *******************************************/
-
-    /**
-     * @param int $id
-     * @param string|null $toScenario
-     * @return BaseModel|null
-     */
-    public function findById(int $id, string $toScenario = null)
-    {
-
-        // Check cache
-        if (!$model = $this->findCacheById($id)) {
-
-            // Find record in db
-            if ($record = $this->findRecordById($id)) {
-
-                // Perhaps in cache
-                $model = $this->findByRecord($record, $toScenario);
-
-            } else {
-
-                $this->_cacheById[$id] = null;
-
-                return null;
-
-            }
-
-        }
-
-        return $model;
-
-    }
-
-    /**
-     * @param int $id
-     * @param string|null $toScenario
-     * @return BaseModel
-     * @throws ModelNotFoundException
-     */
-    public function getById(int $id, string $toScenario = null): BaseModel
-    {
-
-        // Find by ID
-        if (!$model = $this->findById($id, $toScenario)) {
-
-            $this->notFoundByIdException($id);
-
-        }
-
-        return $model;
-
-    }
-
-    /**
-     * @param int $id
-     * @param string|null $toScenario
-     * @return BaseModel|null
-     */
-    public function freshFindById(int $id, string $toScenario = null)
-    {
-
-        // Find record in db
-        if ($record = $this->findRecordById($id)) {
-
-            // Create
-            return $this->createFromRecord($record, $toScenario);
-
-        }
-
-        return null;
-
-    }
-
-    /**
-     * @param int $id
-     * @param string|null $toScenario
-     * @return BaseModel
-     * @throws ModelNotFoundException
-     */
-    public function freshGetById(int $id, string $toScenario = null): BaseModel
-    {
-
-        if (!$model = $this->freshFindById($id, $toScenario)) {
-
-            $this->notFoundByIdException($id);
 
         }
 
@@ -559,6 +456,32 @@ abstract class Model extends Component
         return $this->findByRecord($record, $toScenario);
     }
 
+    /**
+     * @param BaseModel $model
+     * @return Record|null
+     */
+    public function findRecordByModel(BaseModel $model)
+    {
+        return null;
+    }
+
+    /**
+     * @param BaseModel $model
+     * @return Record
+     * @throws RecordNotFoundException
+     */
+    public function getRecordByModel(BaseModel $model)
+    {
+
+        if (!$record = $this->findRecordByModel($model)) {
+
+            throw new RecordNotFoundException("Record does not exist found.");
+
+        }
+
+        return $record;
+
+    }
 
     /*******************************************
      * CACHE
@@ -575,63 +498,9 @@ abstract class Model extends Component
 
             return $this->findCacheByRecord($identifier);
 
-        } elseif (is_numeric($identifier)) {
-
-            return $this->findCacheById($identifier);
-
         }
 
         return null;
-
-    }
-
-    /**
-     * Find an existing cache by ID
-     *
-     * @param $id
-     * @return BaseModel|null
-     */
-    public function findCacheById(int $id)
-    {
-
-        // Check if already in addToCache
-        if ($this->isCachedById($id)) {
-
-            return $this->_cacheById[$id];
-
-        }
-
-        return null;
-
-    }
-
-    /**
-     * Identify whether in cache by ID
-     *
-     * @param $id
-     * @return bool
-     */
-    protected function isCachedById(int $id)
-    {
-        return array_key_exists($id, $this->_cacheById);
-    }
-
-    /**
-     * @param BaseModel $model
-     * @return $this
-     */
-    protected function cacheById(BaseModel $model)
-    {
-
-        // Check if already in cache
-        if (!$id = $this->isCachedById($model->id)) {
-
-            // Cache it
-            $this->_cacheById[$id] = $model;
-
-        }
-
-        return $this;
 
     }
 
@@ -641,14 +510,6 @@ abstract class Model extends Component
      */
     public function findCacheByRecord(Record $record)
     {
-
-        // Check if already in addToCache by id
-        if ($id = $this->isCachedById($record->id)) {
-
-            return $this->findCacheById($id);
-
-        }
-
         return null;
     }
 
@@ -658,45 +519,7 @@ abstract class Model extends Component
      */
     public function addToCache(BaseModel $model)
     {
-
-        $this->cacheById($model);
-
         return $this;
-    }
-
-
-    /*******************************************
-     * FIND/GET RECORD BY ID
-     *******************************************/
-
-    /**
-     * @param int $id
-     * @param string $toScenario
-     * @return Record|null
-     */
-    public function findRecordById(int $id, string $toScenario = null)
-    {
-
-        return $this->findRecordByCondition(
-            ['id' => $id],
-            $toScenario
-        );
-
-    }
-
-    /**
-     * @param int $id
-     * @param string|null $toScenario
-     * @return Record
-     */
-    public function getRecordById(int $id, string $toScenario = null): Record
-    {
-
-        return $this->getRecordByCondition(
-            ['id' => $id],
-            $toScenario
-        );
-
     }
 
 
@@ -713,22 +536,6 @@ abstract class Model extends Component
         throw new ModelNotFoundException(
             sprintf(
                 "Model does not exist."
-            )
-        );
-
-    }
-
-    /**
-     * @param int|null $id
-     * @throws ModelNotFoundException
-     */
-    protected function notFoundByIdException(int $id = null)
-    {
-
-        throw new ModelNotFoundException(
-            sprintf(
-                'Model does not exist with the id "%s".',
-                (string)$id
             )
         );
 

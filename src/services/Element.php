@@ -19,7 +19,6 @@ use flipbox\spark\helpers\SiteHelper;
 use yii\base\Component as BaseComponent;
 
 /**
- * @package flipbox\spark\services
  * @author Flipbox Factory <hello@flipboxfactory.com>
  * @since 1.0.0
  */

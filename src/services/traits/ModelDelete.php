@@ -15,7 +15,6 @@ use flipbox\spark\records\Record;
 use yii\base\ModelEvent;
 
 /**
- * @package flipbox\spark\services\traits
  * @author Flipbox Factory <hello@flipboxfactory.com>
  * @since 1.0.0
  */
@@ -46,6 +45,11 @@ trait ModelDelete
     public function delete(Model $model): bool
     {
 
+        // a 'beforeSave' event
+        if (!$this->beforeDelete($model)) {
+            return false;
+        }
+
         // The event to trigger
         $event = new ModelEvent();
 
@@ -63,7 +67,8 @@ trait ModelDelete
             }
 
             // Get record
-            $record = $this->getRecordById($model->id);
+            /** @var Record $record */
+            $record = $this->getRecordByModel($model);
 
             // Insert record
             if (!$record->delete()) {
@@ -99,7 +104,32 @@ trait ModelDelete
 
         $transaction->commit();
 
+        // an 'afterDelete' event
+        $this->afterDelete($model);
+
         return true;
+
+    }
+
+    /**
+     * @param Model $model
+     * @return bool
+     */
+    protected function beforeDelete(Model $model): bool
+    {
+        return true;
+    }
+
+    /**
+     * @param Model $model
+     */
+    protected function afterDelete(Model $model)
+    {
+
+        Craft::info(sprintf(
+            "Model '%s' was deleted successfully.",
+            (string)get_class($model)
+        ), __METHOD__);
 
     }
 
