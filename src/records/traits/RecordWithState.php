@@ -14,15 +14,10 @@ use flipbox\spark\helpers\RecordHelper;
  * @property bool $enabled
  *
  * @author Flipbox Factory <hello@flipboxfactory.com>
- * @since 1.2.0
+ * @since 2.0.0
  */
 trait RecordWithState
 {
-
-    /**
-     * @var bool Enabled
-     */
-    public $enabled;
 
     /**
      * @inheritdoc

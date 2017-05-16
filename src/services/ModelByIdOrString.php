@@ -8,17 +8,17 @@
 
 namespace flipbox\spark\services;
 
+use flipbox\spark\models\Model as BaseModel;
 use flipbox\spark\records\Record;
-use yii\base\Object as BaseObject;
 
 /**
  * @author Flipbox Factory <hello@flipboxfactory.com>
- * @since 2.0.0
+ * @since 2.1.0
  */
-abstract class ObjectByString extends Object
+abstract class ModelByIdOrString extends ModelById
 {
 
-    use traits\ObjectByString;
+    use traits\ModelByString;
 
     /**
      * @inheritdoc
@@ -63,12 +63,12 @@ abstract class ObjectByString extends Object
     /**
      * @inheritdoc
      */
-    public function addToCache(BaseObject $object)
+    public function addToCache(BaseModel $model)
     {
 
-        parent::addToCache($object);
+        parent::addToCache($model);
 
-        $this->cacheByString($object);
+        $this->cacheByString($model);
 
         return $this;
 
@@ -86,6 +86,41 @@ abstract class ObjectByString extends Object
         }
 
         return $this->findCacheByRecordByString($record);
+
+    }
+
+    /*******************************************
+     * RECORD
+     *******************************************/
+
+    /**
+     * @param BaseModel $model
+     * @return Record|null
+     */
+    public function findRecordByModel(BaseModel $model)
+    {
+
+        $stringValue = $this->stringValue($model);
+
+        if ($stringValue === null) {
+            return null;
+        }
+
+        return $this->findRecordByString($stringValue);
+
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function toRecord(BaseModel $model, bool $mirrorScenario = true): Record
+    {
+
+        if ($record = $this->toRecordByString($model, $mirrorScenario)) {
+            return $record;
+        }
+
+        return parent::toRecord($model, $mirrorScenario);
 
     }
 

@@ -15,7 +15,7 @@ use flipbox\spark\records\Record;
 
 /**
  * @author Flipbox Factory <hello@flipboxfactory.com>
- * @since 1.2.0
+ * @since 2.0.0
  */
 trait ModelByString
 {
@@ -58,7 +58,7 @@ trait ModelByString
      * @param BaseModel $model
      * @return string
      */
-    protected function stringValue(BaseModel $model): string
+    protected function stringValue(BaseModel $model)
     {
 
         $property = $this->stringProperty();
@@ -280,13 +280,19 @@ trait ModelByString
     /**
      * @param BaseModel $model
      * @param bool $mirrorScenario
-     * @return Record
+     * @return Record|null
      */
-    protected function toRecordByString(BaseModel $model, bool $mirrorScenario = true): Record
+    protected function toRecordByString(BaseModel $model, bool $mirrorScenario = true)
     {
 
+        $stringValue = $this->stringValue($model);
+
+        if($stringValue === null) {
+            return null;
+        }
+
         // Get record
-        if (!$record = $this->findRecordByString($this->stringValue($model))) {
+        if (!$record = $this->findRecordByString($stringValue)) {
             return null;
         }
 

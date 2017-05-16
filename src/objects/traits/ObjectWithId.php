@@ -10,7 +10,7 @@ namespace flipbox\spark\objects\traits;
 
 /**
  * @author Flipbox Factory <hello@flipboxfactory.com>
- * @since 1.2.0
+ * @since 2.0.0
  */
 trait ObjectWithId
 {

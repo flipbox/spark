@@ -14,15 +14,10 @@ use flipbox\spark\helpers\RecordHelper;
  * @property int $id
  *
  * @author Flipbox Factory <hello@flipboxfactory.com>
- * @since 1.2.0
+ * @since 2.0.0
  */
 trait RecordWithId
 {
-
-    /**
-     * @var integer
-     */
-    public $id;
 
     /**
      * @inheritdoc

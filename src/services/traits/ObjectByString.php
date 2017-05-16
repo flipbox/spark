@@ -15,7 +15,7 @@ use yii\base\Object as BaseObject;
 
 /**
  * @author Flipbox Factory <hello@flipboxfactory.com>
- * @since 1.2.0
+ * @since 2.0.0
  */
 trait ObjectByString
 {
@@ -58,7 +58,7 @@ trait ObjectByString
      * @param BaseObject $object
      * @return string
      */
-    protected function stringValue(BaseObject $object): string
+    protected function stringValue(BaseObject $object)
     {
 
         $property = $this->stringProperty();

@@ -13,7 +13,7 @@ use flipbox\spark\helpers\ModelHelper;
 
 /**
  * @author Flipbox Factory <hello@flipboxfactory.com>
- * @since 1.2.0
+ * @since 2.0.0
  */
 trait ModelWithId
 {

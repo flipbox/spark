@@ -8,14 +8,14 @@
 
 namespace flipbox\spark\services;
 
-use flipbox\spark\records\Record;
+use flipbox\spark\Records\Record;
 use yii\base\Object as BaseObject;
 
 /**
  * @author Flipbox Factory <hello@flipboxfactory.com>
- * @since 2.0.0
+ * @since 2.1.0
  */
-abstract class ObjectByString extends Object
+abstract class ObjectByIdOrString extends ObjectById
 {
 
     use traits\ObjectByString;

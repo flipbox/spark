@@ -15,7 +15,7 @@ use flipbox\spark\helpers\RecordHelper;
  * @property string $handle
  *
  * @author Flipbox Factory <hello@flipboxfactory.com>
- * @since 1.2.0
+ * @since 2.0.0
  */
 trait RecordWithHandle
 {
@@ -32,11 +32,6 @@ trait RecordWithHandle
      * @var int
      */
     protected $handleLength = 150;
-
-    /**
-     * @var string Handle
-     */
-    public $handle;
 
     /**
      * @inheritdoc

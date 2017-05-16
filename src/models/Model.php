@@ -31,11 +31,6 @@ abstract class Model extends BaseModel
     use DateCreatedAttribute, DateUpdatedAttribute;
 
     /**
-     * @return bool
-     */
-    abstract public function isNew(): bool;
-
-    /**
      * @event ModelEvent an event. You may set
      * [[ModelEvent::isValid]] to be false to stop the save.
      */
@@ -63,6 +58,14 @@ abstract class Model extends BaseModel
      * @var string
      */
     public $uid;
+
+    /**
+     * @return bool
+     */
+    public function isNew(): bool
+    {
+        return true;
+    }
 
     /**
      * @inheritdoc

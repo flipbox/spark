@@ -15,7 +15,7 @@ use yii\base\Object as BaseObject;
 
 /**
  * @author Flipbox Factory <hello@flipboxfactory.com>
- * @since 1.2.0
+ * @since 2.0.0
  */
 abstract class ObjectById extends Object
 {

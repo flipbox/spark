@@ -15,7 +15,7 @@ use flipbox\spark\helpers\SiteHelper;
 
 /**
  * @author Flipbox Factory <hello@flipboxfactory.com>
- * @since 1.2.0
+ * @since 2.0.0
  */
 trait ElementByString
 {
@@ -45,7 +45,7 @@ trait ElementByString
      * @param ElementInterface $element
      * @return string
      */
-    protected function stringValue(ElementInterface $element): string
+    protected function stringValue(ElementInterface $element)
     {
 
         $property = $this->stringProperty();

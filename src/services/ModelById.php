@@ -59,7 +59,7 @@ abstract class ModelById extends Model
             return $model;
         }
 
-        if (!is_numeric($identifier)) {
+        if (empty($identifier) || !is_numeric($identifier)) {
             return null;
         }
 
@@ -77,7 +77,7 @@ abstract class ModelById extends Model
             return $model;
         }
 
-        if (!$record instanceof RecordWithId) {
+        if (!$record instanceof RecordWithId || null === $record->id) {
             return null;
         }
 
@@ -113,7 +113,7 @@ abstract class ModelById extends Model
     public function findRecordByModel(BaseModel $model)
     {
 
-        if ($model instanceof ModelWithId) {
+        if ($model instanceof ModelWithId and null !== $model->id) {
             return $this->findRecordById($model->id);
         }
 

@@ -17,7 +17,7 @@ use flipbox\spark\records\RecordWithId;
 
 /**
  * @author Flipbox Factory <hello@flipboxfactory.com>
- * @since 1.2.0
+ * @since 2.0.0
  *
  * @method RecordWithId|null findRecordByCondition($condition, string $toScenario = null)
  */
@@ -234,9 +234,9 @@ trait ModelById
     /**
      * @param int $id
      * @param string|null $toScenario
-     * @return RecordWithId|null
+     * @return Record|RecordWithId|null
      */
-    public function getRecordById(int $id, string $toScenario = null)
+    public function getRecordById(int $id, string $toScenario = null): Record
     {
 
         if (!$record = $this->findRecordById($id, $toScenario)) {
