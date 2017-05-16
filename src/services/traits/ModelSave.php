@@ -176,7 +176,7 @@ trait ModelSave
         // Transfer record to model
         if ($isNew) {
 
-            if ($model instanceof ModelWithId and $record instanceof RecordWithId) {
+            if ($model instanceof ModelWithId && $record instanceof RecordWithId) {
                 $model->id = $record->id;
             }
 

@@ -54,7 +54,7 @@ abstract class Object extends Component
      *******************************************/
 
     /**
-     * @param array $config
+     * @param array|Record $config
      * @throws InvalidConfigException
      * @return BaseObject
      */

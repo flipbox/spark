@@ -26,11 +26,10 @@ trait ModelDelete
      *******************************************/
 
     /**
-     * @param int $id
-     * @param string|null $toScenario
+     * @param Model $model
      * @return Record
      */
-    abstract public function getRecordById(int $id, string $toScenario = null): Record;
+    abstract public function getRecordByModel(Model $model): Record;
 
 
     /*******************************************

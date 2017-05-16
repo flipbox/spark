@@ -56,7 +56,7 @@ abstract class Model extends Component
      *******************************************/
 
     /**
-     * @param array $config
+     * @param array|Record $config
      * @param string|null $toScenario
      * @throws InvalidConfigException
      * @return BaseModel
@@ -470,7 +470,7 @@ abstract class Model extends Component
      * @return Record
      * @throws RecordNotFoundException
      */
-    public function getRecordByModel(BaseModel $model)
+    public function getRecordByModel(BaseModel $model): Record
     {
 
         if (!$record = $this->findRecordByModel($model)) {

@@ -113,7 +113,7 @@ abstract class ModelById extends Model
     public function findRecordByModel(BaseModel $model)
     {
 
-        if ($model instanceof ModelWithId and null !== $model->id) {
+        if ($model instanceof ModelWithId && null !== $model->id) {
             return $this->findRecordById($model->id);
         }
 
