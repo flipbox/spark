@@ -12,7 +12,7 @@ namespace flipbox\spark\records;
  * @author Flipbox Factory <hello@flipboxfactory.com>
  * @since 2.0.0
  */
-abstract class RecordWithIdAndState extends RecordWithId
+abstract class RecordWithState extends Record
 {
 
     use traits\RecordWithState;
