@@ -55,15 +55,16 @@ abstract class Object extends Component
 
     /**
      * @param array|Record $config
+     * @param string|null $toScenario
      * @throws InvalidConfigException
      * @return BaseObject
      */
-    public function create($config = []): BaseObject
+    public function create($config = [], string $toScenario = null): BaseObject
     {
 
         // Treat records as known data and set via config
         if ($config instanceof Record) {
-            return $this->createFromRecord($config);
+            return $this->createFromRecord($config, $toScenario);
         }
 
         // Force Array

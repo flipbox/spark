@@ -40,13 +40,6 @@ trait ObjectByString
     abstract protected function findByRecord(Record $record, string $toScenario = null): BaseObject;
 
     /**
-     * @param array $config
-     * @param string|null $toScenario
-     * @return BaseObject
-     */
-    abstract public function create($config = [], string $toScenario = null): BaseObject;
-
-    /**
      * @return string
      */
     protected function recordStringProperty(): string
@@ -133,9 +126,7 @@ trait ObjectByString
             return null;
         }
 
-        $model = $this->create($record, $toScenario);
-
-        return $model;
+        return $this->createFromRecord($record, $toScenario);
 
     }
 

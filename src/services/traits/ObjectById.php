@@ -9,7 +9,9 @@
 namespace flipbox\spark\services\traits;
 
 use flipbox\spark\exceptions\ObjectNotFoundException;
+use flipbox\spark\exceptions\RecordNotFoundException;
 use flipbox\spark\objects\ObjectWithId;
+use flipbox\spark\records\Record;
 use flipbox\spark\records\RecordWithId;
 use yii\base\Object as BaseObject;
 
@@ -28,6 +30,14 @@ trait ObjectById
      * @var BaseObject[]
      */
     protected $_cacheById = [];
+
+    /**
+     * @param Record $record
+     * @param string|null $toScenario
+     * @return BaseObject
+     */
+    abstract protected function findByRecord(Record $record, string $toScenario = null): BaseObject;
+
 
     /*******************************************
      * FIND/GET BY ID
@@ -96,17 +106,11 @@ trait ObjectById
     {
 
         // Find record in db
-        if ($record = $this->findRecordByCondition(
-            ['id' => $id]
-        )
-        ) {
-
-            // Create
-            return $this->createFromRecord($record, $toScenario);
-
+        if (!$record = $this->findRecordById($id)) {
+            return null;
         }
 
-        return null;
+        return $this->createFromRecord($record, $toScenario);
 
     }
 
@@ -128,6 +132,11 @@ trait ObjectById
         return $object;
 
     }
+
+
+    /*******************************************
+     * CACHE
+     *******************************************/
 
     /**
      * Find an existing cache by ID
@@ -179,6 +188,48 @@ trait ObjectById
 
     }
 
+
+    /*******************************************
+     * RECORD BY ID
+     *******************************************/
+
+    /**
+     * @param int $id
+     * @param string|null $toScenario
+     * @return RecordWithId|null
+     */
+    public function findRecordById(int $id, string $toScenario = null)
+    {
+
+        return $this->findRecordByCondition(
+            [
+                'id' => $id
+            ],
+            $toScenario
+        );
+
+    }
+
+    /**
+     * @param int $id
+     * @param string|null $toScenario
+     * @throws RecordNotFoundException
+     * @return RecordWithId|null
+     */
+    public function getRecordById(int $id, string $toScenario = null)
+    {
+
+        if (!$record = $this->findRecordById($id, $toScenario)) {
+
+            $this->notFoundRecordByIdException($id);
+
+        }
+
+        return $record;
+
+    }
+
+
     /*******************************************
      * EXCEPTIONS
      *******************************************/
@@ -193,6 +244,22 @@ trait ObjectById
         throw new ObjectNotFoundException(
             sprintf(
                 'Object does not exist with the id "%s".',
+                (string)$id
+            )
+        );
+
+    }
+
+    /**
+     * @param int|null $id
+     * @throws RecordNotFoundException
+     */
+    protected function notFoundRecordByIdException(int $id = null)
+    {
+
+        throw new RecordNotFoundException(
+            sprintf(
+                'Record does not exist with the id "%s".',
                 (string)$id
             )
         );
