@@ -100,27 +100,17 @@ abstract class ModelByIdOrString extends ModelById
     public function findRecordByModel(BaseModel $model)
     {
 
+        if($record = parent::findRecordByModel($model)) {
+            return $record;
+        }
+
         $stringValue = $this->stringValue($model);
 
-        if ($stringValue === null) {
+        if ($stringValue !== null) {
             return null;
         }
 
         return $this->findRecordByString($stringValue);
-
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function toRecord(BaseModel $model, bool $mirrorScenario = true): Record
-    {
-
-        if ($record = $this->toRecordByString($model, $mirrorScenario)) {
-            return $record;
-        }
-
-        return parent::toRecord($model, $mirrorScenario);
 
     }
 

@@ -121,18 +121,4 @@ abstract class ModelById extends Model
 
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function toRecord(BaseModel $model, bool $mirrorScenario = true): Record
-    {
-
-        if ($model instanceof ModelWithId) {
-            return $this->toRecordById($model, $mirrorScenario);
-        }
-
-        return parent::toRecord($model, $mirrorScenario);
-
-    }
-
 }

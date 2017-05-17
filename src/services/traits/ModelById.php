@@ -250,26 +250,6 @@ trait ModelById
     }
 
 
-    /**
-     * @param ModelWithId $model
-     * @param bool $mirrorScenario
-     * @return RecordWithId
-     */
-    protected function toRecordById(ModelWithId $model, bool $mirrorScenario = true): RecordWithId
-    {
-
-        // Get record
-        if (!$record = $this->findRecordById($model->getId())) {
-            return null;
-        }
-
-        // Populate the record attributes
-        $this->transferToRecord($model, $record, $mirrorScenario);
-
-        return $record;
-
-    }
-
     /*******************************************
      * EXCEPTIONS
      *******************************************/

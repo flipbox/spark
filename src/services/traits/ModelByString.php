@@ -276,33 +276,6 @@ trait ModelByString
 
     }
 
-
-    /**
-     * @param BaseModel $model
-     * @param bool $mirrorScenario
-     * @return Record|null
-     */
-    protected function toRecordByString(BaseModel $model, bool $mirrorScenario = true)
-    {
-
-        $stringValue = $this->stringValue($model);
-
-        if($stringValue === null) {
-            return null;
-        }
-
-        // Get record
-        if (!$record = $this->findRecordByString($stringValue)) {
-            return null;
-        }
-
-        // Populate the record attributes
-        $this->transferToRecord($model, $record, $mirrorScenario);
-
-        return $record;
-
-    }
-
     /*******************************************
      * EXCEPTIONS
      *******************************************/
