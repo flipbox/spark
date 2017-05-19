@@ -1,12 +1,16 @@
 Changelog
 =========
+
+## [1.0.0-beta.3] - 2017-05-19
+### Added
+- New user model trait
  
- ## [1.0.0-beta.2] - 2017-05-16
- ### Added
- - New model/element/object traits
+## [1.0.0-beta.2] - 2017-05-16
+### Added
+- New model/element/object traits
  
- ### Changed
- - Refactored services and models to user traits.
+### Changed
+- Refactored services and models to user traits.
  
 ## [1.0.0-beta.1] - 2017-05-15
 
