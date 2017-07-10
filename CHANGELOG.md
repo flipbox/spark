@@ -1,6 +1,10 @@
 Changelog
 =========
 
+## [1.0.0-beta.4] - 2017-7-10
+### Changed
+- ArrayHelper::firstValue compatibility with Craft beta.21
+
 ## [1.0.0-beta.3] - 2017-05-19
 ### Added
 - New user model trait
