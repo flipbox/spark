@@ -24,7 +24,7 @@ class ArrayHelper extends BaseArrayHelper
      *
      * @return mixed|null
      */
-    public static function firstValue($arr)
+    public static function firstValue(array $arr)
     {
         if (is_array($arr)) {
             foreach ($arr as $value) {
