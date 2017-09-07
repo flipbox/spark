@@ -59,24 +59,17 @@ trait ModelById
 
         // Check cache
         if (!$model = $this->findCacheById($id)) {
-
             // Find record in db
             if ($record = $this->findRecordById($id)) {
-
                 $model = $this->findByRecord($record, $toScenario);
-
             } else {
-
                 $this->_cacheById[$id] = null;
 
                 return null;
-
             }
-
         }
 
         return $model;
-
     }
 
     /**
@@ -89,13 +82,10 @@ trait ModelById
     {
 
         if (!$model = $this->findById($id, $toScenario)) {
-
             $this->notFoundByIdException($id);
-
         }
 
         return $model;
-
     }
 
     /**
@@ -114,7 +104,6 @@ trait ModelById
         $model = $this->create($record, $toScenario);
 
         return $model;
-
     }
 
     /**
@@ -127,13 +116,10 @@ trait ModelById
     {
 
         if (!$model = $this->freshFindById($id, $toScenario)) {
-
             $this->notFoundByIdException($id);
-
         }
 
         return $model;
-
     }
 
     /*******************************************
@@ -155,7 +141,6 @@ trait ModelById
         }
 
         return $this->_cacheById[$id];
-
     }
 
     /**
@@ -183,14 +168,11 @@ trait ModelById
 
         // Check if already in cache
         if (!$this->isCachedById($model->getId())) {
-
             // Cache it
             $this->_cacheById[$model->getId()] = $model;
-
         }
 
         return $this;
-
     }
 
     /**
@@ -207,7 +189,6 @@ trait ModelById
         }
 
         return $this->findCacheById($value);
-
     }
 
     /*******************************************
@@ -228,7 +209,6 @@ trait ModelById
             ],
             $toScenario
         );
-
     }
 
     /**
@@ -240,13 +220,10 @@ trait ModelById
     {
 
         if (!$record = $this->findRecordById($id, $toScenario)) {
-
             $this->notFoundRecordByIdException($id);
-
         }
 
         return $record;
-
     }
 
 
@@ -267,7 +244,6 @@ trait ModelById
                 (string)$id
             )
         );
-
     }
 
     /**
@@ -283,7 +259,5 @@ trait ModelById
                 (string)$id
             )
         );
-
     }
-
 }

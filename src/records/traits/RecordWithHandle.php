@@ -76,7 +76,5 @@ trait RecordWithHandle
                 ]
             ]
         ];
-
     }
-
 }

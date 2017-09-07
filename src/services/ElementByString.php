@@ -38,7 +38,6 @@ abstract class ElementByString extends Element
         }
 
         return $this->findByString($identifier, $siteId);
-
     }
 
     /**
@@ -56,7 +55,6 @@ abstract class ElementByString extends Element
         }
 
         return $this->findCacheByString($identifier);
-
     }
 
     /**
@@ -70,7 +68,5 @@ abstract class ElementByString extends Element
         $this->cacheByString($element);
 
         return $this;
-
     }
-
 }

@@ -34,7 +34,6 @@ trait DateUpdatedAttribute
         $this->_dateUpdated = $value ?: null;
 
         return $this;
-
     }
 
     /**
@@ -44,15 +43,12 @@ trait DateUpdatedAttribute
     {
 
         if (empty($this->_dateUpdated)) {
-
             return DateTimeHelper::toDateTime(
                 new DateTime('now')
             );
-
         }
 
         return $this->_dateUpdated;
-
     }
 
     /**
@@ -69,11 +65,8 @@ trait DateUpdatedAttribute
         // Convert it to iso
         if (!$iso = DateTimeHelper::toIso8601($dateCreated)) {
             return null;
-
         }
 
         return $iso;
-
     }
-
 }

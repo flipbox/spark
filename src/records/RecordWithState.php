@@ -27,7 +27,5 @@ abstract class RecordWithState extends Record
             parent::rules(),
             $this->stateRules()
         );
-
     }
-
 }

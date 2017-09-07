@@ -43,7 +43,6 @@ trait RecordWithId
                 ]
             ]
         ];
-
     }
 
     /**
@@ -53,5 +52,4 @@ trait RecordWithId
     {
         return $this->id;
     }
-
 }

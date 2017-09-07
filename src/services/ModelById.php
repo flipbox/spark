@@ -41,7 +41,6 @@ abstract class ModelById extends Model
         }
 
         return $this->findById($identifier, $toScenario);
-
     }
 
 
@@ -64,7 +63,6 @@ abstract class ModelById extends Model
         }
 
         return $this->findCacheById($identifier);
-
     }
 
     /**
@@ -83,7 +81,6 @@ abstract class ModelById extends Model
 
         // Check if already in cache by id
         return $this->findCacheById($record->id);
-
     }
 
     /**
@@ -99,7 +96,6 @@ abstract class ModelById extends Model
         }
 
         return $this;
-
     }
 
     /*******************************************
@@ -118,7 +114,5 @@ abstract class ModelById extends Model
         }
 
         return parent::findRecordByModel($model);
-
     }
-
 }

@@ -64,7 +64,6 @@ abstract class ElementWithHandle extends Element
                 ]
             ]
         );
-
     }
 
     /**
@@ -79,7 +78,5 @@ abstract class ElementWithHandle extends Element
                 'handle' => Craft::t('app', 'Handle')
             ]
         );
-
     }
-
 }

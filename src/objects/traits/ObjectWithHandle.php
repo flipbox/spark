@@ -19,5 +19,4 @@ trait ObjectWithHandle
      * @var string
      */
     public $handle;
-
 }

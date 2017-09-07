@@ -41,7 +41,7 @@ abstract class Model extends Component
     /**
      * @return string
      */
-    public abstract static function modelClass(): string;
+    abstract public static function modelClass(): string;
 
     /**
      * @return string
@@ -82,7 +82,6 @@ abstract class Model extends Component
             static::modelClassInstance(),
             $toScenario
         );
-
     }
 
     /**
@@ -108,7 +107,6 @@ abstract class Model extends Component
         }
 
         return $model;
-
     }
 
     /*******************************************
@@ -124,24 +122,17 @@ abstract class Model extends Component
 
         // Check addToCache
         if (is_null($this->_cacheAll)) {
-
             $this->_cacheAll = [];
 
             // Find record in db
             if ($records = $this->findAllRecords()) {
-
                 foreach ($records as $record) {
-
                     $this->_cacheAll[] = $this->findByRecord($record, $toScenario);
-
                 }
-
             }
-
         }
 
         return $this->_cacheAll;
-
     }
 
     /**
@@ -153,13 +144,10 @@ abstract class Model extends Component
     {
 
         if (!$models = $this->findAll($toScenario)) {
-
             $this->notFoundException();
-
         }
 
         return $models;
-
     }
 
     /*******************************************
@@ -175,7 +163,6 @@ abstract class Model extends Component
     {
 
         if ($identifier instanceof BaseModel) {
-
             $this->addToCache($identifier);
 
             if (null !== $toScenario) {
@@ -183,15 +170,11 @@ abstract class Model extends Component
             }
 
             return $identifier;
-
         } elseif ($identifier instanceof Record) {
-
             return $this->findByRecord($identifier, $toScenario);
-
         }
 
         return null;
-
     }
 
     /**
@@ -205,13 +188,10 @@ abstract class Model extends Component
 
         // Find model by ID
         if (!$model = $this->find($identifier, $toScenario)) {
-
             $this->notFoundException();
-
         }
 
         return $model;
-
     }
 
     /*******************************************
@@ -233,7 +213,6 @@ abstract class Model extends Component
         }
 
         return $models;
-
     }
 
     /**
@@ -250,7 +229,6 @@ abstract class Model extends Component
         }
 
         return $this->findByRecord($record, $toScenario);
-
     }
 
     /*******************************************
@@ -269,15 +247,12 @@ abstract class Model extends Component
 
         // Find record in db
         if ($records = $this->findAllRecordsByCondition($condition)) {
-
             foreach ($records as $record) {
                 $models[] = $this->findByRecord($record, $toScenario);
             }
-
         }
 
         return $models;
-
     }
 
     /**
@@ -290,13 +265,10 @@ abstract class Model extends Component
     {
 
         if (!$models = $this->findAllByCondition($condition, $toScenario)) {
-
             $this->notFoundByConditionException($condition);
-
         }
 
         return $models;
-
     }
 
     /**
@@ -313,7 +285,6 @@ abstract class Model extends Component
         }
 
         return null;
-
     }
 
     /**
@@ -326,13 +297,10 @@ abstract class Model extends Component
     {
 
         if (!$model = $this->findByCondition($condition, $toScenario)) {
-
             $this->notFoundByConditionException($condition);
-
         }
 
         return $model;
-
     }
 
     /*******************************************
@@ -352,15 +320,12 @@ abstract class Model extends Component
         // Find record in db
         if ($records = $this->findAllRecordsByCriteria($criteria)
         ) {
-
             foreach ($records as $record) {
                 $models[] = $this->findByRecord($record, $toScenario);
             }
-
         }
 
         return $models;
-
     }
 
     /**
@@ -373,13 +338,10 @@ abstract class Model extends Component
     {
 
         if (!$models = $this->findAllByCriteria($criteria, $toScenario)) {
-
             $this->notFoundByCriteriaException($criteria);
-
         }
 
         return $models;
-
     }
 
     /**
@@ -396,7 +358,6 @@ abstract class Model extends Component
         }
 
         return null;
-
     }
 
     /**
@@ -409,13 +370,10 @@ abstract class Model extends Component
     {
 
         if (!$model = $this->findByCriteria($criteria, $toScenario)) {
-
             $this->notFoundByCriteriaException($criteria);
-
         }
 
         return $model;
-
     }
 
 
@@ -433,17 +391,14 @@ abstract class Model extends Component
 
         // Check addToCache
         if (!$model = $this->findCacheByRecord($record)) {
-
             // New model
             $model = $this->createFromRecord($record, $toScenario);
 
             // Cache it
             $this->addToCache($model);
-
         }
 
         return $model;
-
     }
 
     /**
@@ -474,13 +429,10 @@ abstract class Model extends Component
     {
 
         if (!$record = $this->findRecordByModel($model)) {
-
             throw new RecordNotFoundException("Record does not exist found.");
-
         }
 
         return $record;
-
     }
 
     /*******************************************
@@ -495,13 +447,10 @@ abstract class Model extends Component
     {
 
         if ($identifier instanceof Record) {
-
             return $this->findCacheByRecord($identifier);
-
         }
 
         return null;
-
     }
 
     /**
@@ -538,7 +487,6 @@ abstract class Model extends Component
                 "Model does not exist."
             )
         );
-
     }
 
     /**
@@ -554,7 +502,6 @@ abstract class Model extends Component
                 (string)JsonHelper::encode($criteria)
             )
         );
-
     }
 
     /**
@@ -570,7 +517,5 @@ abstract class Model extends Component
                 (string)JsonHelper::encode($condition)
             )
         );
-
     }
-
 }

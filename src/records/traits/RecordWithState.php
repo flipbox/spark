@@ -36,7 +36,6 @@ trait RecordWithState
                 ]
             ]
         ];
-
     }
 
     /**
@@ -72,5 +71,4 @@ trait RecordWithState
         $this->enabled = false;
         return $this;
     }
-
 }

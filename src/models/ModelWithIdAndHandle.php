@@ -27,7 +27,6 @@ abstract class ModelWithIdAndHandle extends ModelWithId
             parent::rules(),
             $this->handleRules()
         );
-
     }
 
     /**
@@ -40,7 +39,5 @@ abstract class ModelWithIdAndHandle extends ModelWithId
             parent::attributeLabels(),
             $this->handleAttributeLabel()
         );
-
     }
-
 }

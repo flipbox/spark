@@ -34,5 +34,4 @@ class ArrayHelper extends BaseArrayHelper
 
         return null;
     }
-
 }

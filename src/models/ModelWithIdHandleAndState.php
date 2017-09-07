@@ -27,7 +27,6 @@ abstract class ModelWithIdAndHandleAndState extends ModelWithIdAndHandle
             parent::rules(),
             $this->stateRules()
         );
-
     }
 
     /**
@@ -40,7 +39,5 @@ abstract class ModelWithIdAndHandleAndState extends ModelWithIdAndHandle
             parent::attributeLabels(),
             $this->stateAttributeLabel()
         );
-
     }
-
 }

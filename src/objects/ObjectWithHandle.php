@@ -18,5 +18,4 @@ class ObjectWithHandle extends Object
 {
 
     use traits\ObjectWithHandle;
-
 }

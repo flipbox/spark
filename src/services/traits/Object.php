@@ -48,16 +48,13 @@ trait Object
         $query = $recordClass::find();
 
         if ($config) {
-
             QueryHelper::configure(
                 $query,
                 $config
             );
-
         }
 
         return $query;
-
     }
 
     /*******************************************
@@ -89,7 +86,6 @@ trait Object
         }
 
         return $record;
-
     }
 
     /**
@@ -108,7 +104,6 @@ trait Object
             RecordHelper::conditionToCriteria($condition),
             $toScenario
         );
-
     }
 
     /**
@@ -123,16 +118,13 @@ trait Object
 
         /** @var Record $record */
         if ($record = $query->one()) {
-
             // Set scenario
             if ($toScenario) {
                 $record->setScenario($toScenario);
             }
-
         }
 
         return $record;
-
     }
 
     /**
@@ -145,13 +137,10 @@ trait Object
     {
 
         if (!$record = $this->findRecordByCondition($condition, $toScenario)) {
-
             $this->notFoundRecordException();
-
         }
 
         return $record;
-
     }
 
     /**
@@ -164,13 +153,10 @@ trait Object
     {
 
         if (!$record = $this->findRecordByCriteria($criteria, $toScenario)) {
-
             $this->notFoundRecordException();
-
         }
 
         return $record;
-
     }
 
 
@@ -195,7 +181,6 @@ trait Object
             RecordHelper::conditionToCriteria($condition),
             $toScenario
         );
-
     }
 
     /**
@@ -216,16 +201,12 @@ trait Object
 
             /** @var Record $record */
             foreach ($records as $record) {
-
                 // Set scenario
                 $record->setScenario($toScenario);
-
             }
-
         }
 
         return $records;
-
     }
 
 
@@ -245,7 +226,6 @@ trait Object
         );
 
         return $this->getAllRecordsByCondition($condition, $toScenario);
-
     }
 
     /**
@@ -258,13 +238,10 @@ trait Object
     {
 
         if (!$records = $this->findAllRecordsByCondition($condition, $toScenario)) {
-
             $this->notFoundRecordException();
-
         }
 
         return $records;
-
     }
 
     /**
@@ -277,13 +254,10 @@ trait Object
     {
 
         if (!$records = $this->findAllRecordsByCriteria($criteria, $toScenario)) {
-
             $this->notFoundRecordException();
-
         }
 
         return $records;
-
     }
 
     /*******************************************
@@ -301,7 +275,5 @@ trait Object
                 "Record does not exist."
             )
         );
-
     }
-
 }

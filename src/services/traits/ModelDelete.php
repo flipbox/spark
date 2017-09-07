@@ -56,10 +56,8 @@ trait ModelDelete
         $transaction = RecordHelper::beginTransaction();
 
         try {
-
             // The 'before' event
             if (!$model->beforeDelete($event)) {
-
                 $transaction->rollBack();
 
                 return false;
@@ -71,7 +69,6 @@ trait ModelDelete
 
             // Insert record
             if (!$record->delete()) {
-
                 // Transfer errors to model
                 $model->addErrors($record->getErrors());
 
@@ -79,26 +76,20 @@ trait ModelDelete
                 $transaction->rollBack();
 
                 return false;
-
             }
 
             // The 'after' event
             if (!$model->afterDelete($event)) {
-
                 // Roll back db transaction
                 $transaction->rollBack();
 
                 return false;
-
             }
-
         } catch (\Exception $e) {
-
             // Roll back all db actions (fail)
             $transaction->rollback();
 
             throw $e;
-
         }
 
         $transaction->commit();
@@ -107,7 +98,6 @@ trait ModelDelete
         $this->afterDelete($model);
 
         return true;
-
     }
 
     /**
@@ -129,7 +119,5 @@ trait ModelDelete
             "Model '%s' was deleted successfully.",
             (string)get_class($model)
         ), __METHOD__);
-
     }
-
 }

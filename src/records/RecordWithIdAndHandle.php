@@ -27,7 +27,5 @@ abstract class RecordWithIdAndHandle extends RecordWithId
             parent::rules(),
             $this->handleRules()
         );
-
     }
-
 }

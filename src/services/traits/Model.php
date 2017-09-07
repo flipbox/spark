@@ -40,15 +40,12 @@ trait Model
     {
 
         if ($mirrorScenario === true) {
-
             // Mirror scenarios
             $record->setScenario($model->getScenario());
-
         }
 
         // Transfer attributes
         $record->setAttributes($model->toArray());
-
     }
 
     /**
@@ -60,17 +57,13 @@ trait Model
     {
 
         if (!$record = $this->findRecordByModel($model)) {
-
             // Create new record
             $record = $this->createRecord();
-
         }
 
         // Populate the record attributes
         $this->transferToRecord($model, $record, $mirrorScenario);
 
         return $record;
-
     }
-
 }

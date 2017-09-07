@@ -40,14 +40,12 @@ trait UserTrait
 
         // Has the id changed?
         if ($id !== $this->_userId) {
-
             // Invalidate existing user
             if ($this->_user !== null && $this->_user->getId() !== $id) {
                 $this->_user = null;
             };
 
             $this->_userId = $id;
-
         }
 
         return $this;
@@ -78,22 +76,17 @@ trait UserTrait
 
         // Find element
         if (!$user = $this->findUserElement($user)) {
-
             // Clear property / cache
             $this->_userId = $this->_user = null;
-
         } else {
-
             // Set property
             $this->_userId = $user->getId();
 
             // Set cache
             $this->_user = $user;
-
         }
 
         return $this;
-
     }
 
     /**
@@ -104,37 +97,26 @@ trait UserTrait
 
         // Check cache
         if (is_null($this->_user)) {
-
             // Check property
             if (!empty($this->_userId)) {
-
                 // Find element
                 if ($userElement = Craft::$app->getUsers()->getUserById($this->_userId)) {
-
                     // Set
                     $this->setUser($userElement);
-
                 } else {
-
                     // Clear property (it's invalid)
                     $this->_userId = null;
 
                     // Prevent subsequent look-ups
                     $this->_user = false;
-
                 }
-
             } else {
-
                 // Prevent subsequent look-ups
                 $this->_user = false;
-
             }
-
         }
 
         return !$this->_user ? null : $this->_user;
-
     }
 
     /**
@@ -146,23 +128,18 @@ trait UserTrait
 
         // Element
         if ($user instanceof UserElement) {
-
             return $user;
 
             // Id
         } elseif (is_numeric($user)) {
-
             return Craft::$app->getUsers()->getUserById($user);
 
             // Username / Email
         } elseif (!is_null($user)) {
-
             return Craft::$app->getUsers()->getUserByUsernameOrEmail($user);
-
         }
 
         return null;
-
     }
 
     /**
@@ -190,7 +167,6 @@ trait UserTrait
                 ]
             ]
         ];
-
     }
 
     /**
@@ -202,7 +178,6 @@ trait UserTrait
         return [
             'userId'
         ];
-
     }
 
     /**
@@ -214,7 +189,6 @@ trait UserTrait
         return [
             'userId'
         ];
-
     }
 
     /**
@@ -226,7 +200,5 @@ trait UserTrait
         return [
             'userId' => Craft::t('app', 'User Id')
         ];
-
     }
-
 }

@@ -37,18 +37,14 @@ class QueryHelper
 
         // Populate query attributes
         foreach ($config as $name => $value) {
-
             if (property_exists($query, $name)) {
                 $query->$name = $value;
             } elseif (method_exists($query, 'set' . $name)) {
                 // set property
                 $query->{'set' . $name}($value);
             }
-
         }
 
         return $query;
-
     }
-
 }

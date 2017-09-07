@@ -47,7 +47,6 @@ trait ModelWithId
                 ]
             ]
         ];
-
     }
 
     /**
@@ -59,7 +58,6 @@ trait ModelWithId
         return [
             'id' => Craft::t('app', 'Id')
         ];
-
     }
 
     /**
@@ -69,5 +67,4 @@ trait ModelWithId
     {
         return $this->id;
     }
-
 }

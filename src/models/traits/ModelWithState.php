@@ -74,7 +74,6 @@ trait ModelWithState
                 ]
             ]
         ];
-
     }
 
     /**
@@ -86,7 +85,5 @@ trait ModelWithState
         return [
             'state' => Craft::t('app', 'State')
         ];
-
     }
-
 }

@@ -22,5 +22,4 @@ abstract class ModelByIdOrHandle extends ModelByIdOrString
     {
         return 'handle';
     }
-
 }

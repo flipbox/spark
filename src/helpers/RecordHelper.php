@@ -68,7 +68,6 @@ class RecordHelper
         $model = new $class();
 
         return static::populate($model, $config, $toScenario);
-
     }
 
     /**
@@ -82,11 +81,9 @@ class RecordHelper
 
         // Set properties
         foreach ($properties as $name => $value) {
-
             if ($record->canSetProperty($name)) {
                 $record->$name = $value;
             }
-
         }
 
         // Set scenario
@@ -95,7 +92,6 @@ class RecordHelper
         }
 
         return $record;
-
     }
 
     /**
@@ -111,15 +107,12 @@ class RecordHelper
 
         // Assume it's an id
         if (!is_array($condition)) {
-
             $condition = [
                 'id' => $condition
             ];
-
         }
 
         return ['where' => ['and', $condition]];
-
     }
 
     /**
@@ -138,7 +131,6 @@ class RecordHelper
         );
 
         return $query;
-
     }
 
 
@@ -149,5 +141,4 @@ class RecordHelper
     {
         return Craft::$app->getDb()->beginTransaction();
     }
-
 }

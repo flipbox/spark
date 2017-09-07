@@ -77,7 +77,6 @@ trait LoggableTrait
         }
 
         self::$_dispatcher = $dispatcher;
-
     }
 
     /**
@@ -127,5 +126,4 @@ trait LoggableTrait
     {
         static::getLogger()->log($message, Logger::LEVEL_INFO, $category);
     }
-
 }

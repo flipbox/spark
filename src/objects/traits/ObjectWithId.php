@@ -19,5 +19,4 @@ trait ObjectWithId
      * @var int
      */
     public $id;
-
 }

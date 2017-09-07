@@ -65,7 +65,6 @@ class ModelHelper
         $model = new $class();
 
         return static::populate($model, $config, $toScenario);
-
     }
 
     /**
@@ -86,7 +85,5 @@ class ModelHelper
         $model->setAttributes($attributes);
 
         return $model;
-
     }
-
 }

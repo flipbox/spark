@@ -35,7 +35,6 @@ abstract class ModelWithId extends Model
             parent::rules(),
             $this->idRules()
         );
-
     }
 
     /**
@@ -48,7 +47,5 @@ abstract class ModelWithId extends Model
             parent::attributeLabels(),
             $this->idAttributeLabel()
         );
-
     }
-
 }

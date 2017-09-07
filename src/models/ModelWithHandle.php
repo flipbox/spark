@@ -35,7 +35,6 @@ abstract class ModelWithHandle extends Model
             parent::rules(),
             $this->handleRules()
         );
-
     }
 
     /**
@@ -48,7 +47,5 @@ abstract class ModelWithHandle extends Model
             parent::attributeLabels(),
             $this->handleAttributeLabel()
         );
-
     }
-
 }

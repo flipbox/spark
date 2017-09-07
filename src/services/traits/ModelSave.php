@@ -72,10 +72,8 @@ trait ModelSave
         $transaction = RecordHelper::beginTransaction();
 
         try {
-
             // The 'before' event
             if (!$model->beforeSave($event)) {
-
                 $transaction->rollBack();
 
                 return false;
@@ -85,25 +83,21 @@ trait ModelSave
 
             // Validate
             if (!$record->validate($attributes)) {
-
                 $model->addErrors($record->getErrors());
 
                 $transaction->rollBack();
 
                 return false;
-
             }
 
             // Insert record
             if (!$record->save($attributes)) {
-
                 // Transfer errors to model
                 $model->addErrors($record->getErrors());
 
                 $transaction->rollBack();
 
                 return false;
-
             }
 
             // Transfer attributes to model
@@ -116,19 +110,14 @@ trait ModelSave
 
             // The 'after' event
             if (!$model->afterSave($event)) {
-
                 $transaction->rollBack();
 
                 return false;
-
             }
-
         } catch (\Exception $e) {
-
             $transaction->rollBack();
 
             throw $e;
-
         }
 
         $transaction->commit();
@@ -137,7 +126,6 @@ trait ModelSave
         $this->afterSave($model, $isNew);
 
         return true;
-
     }
 
     /**
@@ -161,7 +149,6 @@ trait ModelSave
             "Model '%s' was saved successfully.",
             (string)get_class($model)
         ), __METHOD__);
-
     }
 
     /**
@@ -175,7 +162,6 @@ trait ModelSave
 
         // Transfer record to model
         if ($isNew) {
-
             if ($model instanceof ModelWithId && $record instanceof RecordWithId) {
                 $model->id = $record->id;
             }
@@ -184,7 +170,5 @@ trait ModelSave
             $model->uid = $record->uid;
         }
         $model->dateUpdated = $record->dateUpdated;
-
     }
-
 }

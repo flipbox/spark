@@ -96,7 +96,6 @@ abstract class Model extends BaseModel
                 ]
             ]
         );
-
     }
 
     /**
@@ -112,7 +111,6 @@ abstract class Model extends BaseModel
                 'dateUpdated'
             ]
         );
-
     }
 
     /**
@@ -129,7 +127,6 @@ abstract class Model extends BaseModel
                 'dateUpdated' => Craft::t('app', 'Date Updated')
             ]
         );
-
     }
 
     /**
@@ -145,7 +142,6 @@ abstract class Model extends BaseModel
                 'dateUpdated' => 'dateUpdatedIso8601'
             ]
         );
-
     }
 
     /**
@@ -183,5 +179,4 @@ abstract class Model extends BaseModel
         $this->trigger(self::EVENT_AFTER_SAVE, $event);
         return $event->isValid;
     }
-
 }

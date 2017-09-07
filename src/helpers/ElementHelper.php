@@ -67,7 +67,6 @@ class ElementHelper extends BaseElementHelper
         $model = new $class();
 
         return static::populate($model, $config, $toScenario);
-
     }
 
     /**
@@ -90,7 +89,5 @@ class ElementHelper extends BaseElementHelper
         $element->setAttributes($attributes);
 
         return $element;
-
     }
-
 }

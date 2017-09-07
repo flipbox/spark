@@ -41,7 +41,6 @@ abstract class ObjectById extends Object
         }
 
         return $this->findById($identifier, $toScenario);
-
     }
 
     /*******************************************
@@ -63,7 +62,6 @@ abstract class ObjectById extends Object
         }
 
         return $this->findCacheById($identifier);
-
     }
 
     /**
@@ -82,7 +80,6 @@ abstract class ObjectById extends Object
 
         // Check if already in cache by id
         return $this->findCacheById($record->id);
-
     }
 
     /**
@@ -98,7 +95,5 @@ abstract class ObjectById extends Object
         }
 
         return $this;
-
     }
-
 }

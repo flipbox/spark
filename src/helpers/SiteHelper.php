@@ -25,15 +25,9 @@ class SiteHelper
     {
 
         if (is_null($siteId)) {
-
             $siteId = Craft::$app->getSites()->currentSite->id;
-
         }
 
         return $siteId;
-
     }
-
 }
-
-

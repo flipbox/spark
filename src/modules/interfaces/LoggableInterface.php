@@ -21,5 +21,4 @@ interface LoggableInterface
      * @return bool
      */
     public function isDebugModeEnabled();
-
 }

@@ -87,8 +87,11 @@ class LoggingHelper
                         ['error', 'warning'],
                         static::isDebugModeEnabled($module) ? ['trace', 'info'] : []
                     ),
-                    'logFile' => Craft::getAlias('@storage/logs/' . strtolower(str_replace('/', '-',
-                            $module->getUniqueId())) . '.log'),
+                    'logFile' => Craft::getAlias('@storage/logs/' . strtolower(str_replace(
+                        '/',
+                        '-',
+                        $module->getUniqueId()
+                    )) . '.log'),
                     'logVars' => [],
                     'fileMode' => $configService->defaultFileMode,
                     'dirMode' => $configService->defaultDirMode,

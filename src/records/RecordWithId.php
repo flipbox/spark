@@ -27,7 +27,5 @@ abstract class RecordWithId extends Record
             parent::rules(),
             $this->idRules()
         );
-
     }
-
 }

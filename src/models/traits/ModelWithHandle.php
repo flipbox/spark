@@ -60,7 +60,6 @@ trait ModelWithHandle
                 ]
             ]
         ];
-
     }
 
     /**
@@ -72,7 +71,5 @@ trait ModelWithHandle
         return [
             'handle' => Craft::t('app', 'Handle')
         ];
-
     }
-
 }

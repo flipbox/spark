@@ -18,5 +18,4 @@ class ObjectWithId extends Object
 {
 
     use traits\ObjectWithId;
-
 }

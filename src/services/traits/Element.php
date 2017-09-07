@@ -36,15 +36,12 @@ trait Element
         /** @var $element BaseElement */
 
         if ($mirrorScenario === true) {
-
             // Mirror scenarios
             $record->setScenario($element->getScenario());
-
         }
 
         // Transfer attributes
         $record->setAttributes($element->toArray());
-
     }
 
     /**
@@ -56,25 +53,19 @@ trait Element
     {
 
         if ($id = $element->getId()) {
-
             $record = $this->findRecordByCondition(
                 ['id' => $id]
             );
-
         }
 
         if (empty($record)) {
-
             // Create new record
             $record = $this->createRecord();
-
         }
 
         // Populate the record attributes
         $this->transferToRecord($element, $record, $mirrorScenario);
 
         return $record;
-
     }
-
 }

@@ -35,7 +35,6 @@ abstract class ObjectByString extends Object
         }
 
         return $this->findByString($identifier, $toScenario);
-
     }
 
     /*******************************************
@@ -57,7 +56,6 @@ abstract class ObjectByString extends Object
         }
 
         return $this->findCacheByString($identifier);
-
     }
 
     /**
@@ -71,7 +69,6 @@ abstract class ObjectByString extends Object
         $this->cacheByString($object);
 
         return $this;
-
     }
 
 
@@ -86,7 +83,5 @@ abstract class ObjectByString extends Object
         }
 
         return $this->findCacheByRecordByString($record);
-
     }
-
 }

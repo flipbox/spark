@@ -53,28 +53,21 @@ trait ObjectById
 
         // Check cache
         if (!$object = $this->findCacheById($id)) {
-
             // Find record in db
             if ($record = $this->findRecordByCondition(
                 ['id' => $id]
             )
             ) {
-
                 // Perhaps in cache
                 $object = $this->findByRecord($record, $toScenario);
-
             } else {
-
                 $this->_cacheById[$id] = null;
 
                 return null;
-
             }
-
         }
 
         return $object;
-
     }
 
     /**
@@ -88,13 +81,10 @@ trait ObjectById
 
         // Find by ID
         if (!$object = $this->findById($id, $toScenario)) {
-
             $this->notFoundByIdException($id);
-
         }
 
         return $object;
-
     }
 
     /**
@@ -111,7 +101,6 @@ trait ObjectById
         }
 
         return $this->createFromRecord($record, $toScenario);
-
     }
 
     /**
@@ -124,13 +113,10 @@ trait ObjectById
     {
 
         if (!$object = $this->freshFindById($id, $toScenario)) {
-
             $this->notFoundByIdException($id);
-
         }
 
         return $object;
-
     }
 
 
@@ -149,13 +135,10 @@ trait ObjectById
 
         // Check if already in addToCache
         if ($this->isCachedById($id)) {
-
             return $this->_cacheById[$id];
-
         }
 
         return null;
-
     }
 
     /**
@@ -178,14 +161,11 @@ trait ObjectById
 
         // Check if already in cache
         if (!$id = $this->isCachedById($object->id)) {
-
             // Cache it
             $this->_cacheById[$id] = $object;
-
         }
 
         return $this;
-
     }
 
 
@@ -207,7 +187,6 @@ trait ObjectById
             ],
             $toScenario
         );
-
     }
 
     /**
@@ -220,13 +199,10 @@ trait ObjectById
     {
 
         if (!$record = $this->findRecordById($id, $toScenario)) {
-
             $this->notFoundRecordByIdException($id);
-
         }
 
         return $record;
-
     }
 
 
@@ -247,7 +223,6 @@ trait ObjectById
                 (string)$id
             )
         );
-
     }
 
     /**
@@ -263,7 +238,5 @@ trait ObjectById
                 (string)$id
             )
         );
-
     }
-
 }

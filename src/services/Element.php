@@ -37,7 +37,7 @@ abstract class Element extends BaseComponent
     /**
      * @return string
      */
-    public abstract static function elementClass(): string;
+    abstract public static function elementClass(): string;
 
     /**
      * The element instance that this class interacts with
@@ -68,7 +68,6 @@ abstract class Element extends BaseComponent
             $config,
             static::elementClassInstance()
         );
-
     }
 
 
@@ -81,25 +80,18 @@ abstract class Element extends BaseComponent
     {
 
         if ($identifier instanceof ElementInterface) {
-
             $this->addToCache($identifier);
 
             return $identifier;
-
         } elseif (is_numeric($identifier)) {
-
             return $this->findById($identifier, $siteId);
-
         } elseif (is_array($identifier)) {
-
             return $this->getQuery($identifier)
                 ->siteId($siteId)
                 ->one();
-
         }
 
         return null;
-
     }
 
     /**
@@ -112,24 +104,17 @@ abstract class Element extends BaseComponent
 
         // Check cache
         if (!$element = $this->findCacheById($id, $siteId)) {
-
             // Find new element
             if ($element = $this->freshFindById($id, $siteId)) {
-
                 // Cache it
                 $this->addToCache($element);
-
             } else {
-
                 // Cache nothing
                 $this->_cacheById[$id] = $element;
-
             }
-
         }
 
         return $element;
-
     }
 
     /*******************************************
@@ -147,13 +132,10 @@ abstract class Element extends BaseComponent
 
         // Find
         if (!$element = $this->find($identifier, $siteId)) {
-
             $this->notFoundException();
-
         }
 
         return $element;
-
     }
 
     /**
@@ -167,13 +149,10 @@ abstract class Element extends BaseComponent
 
         // Find by ID
         if (!$element = $this->findById($id, $siteId)) {
-
             $this->notFoundByIdException($id);
-
         }
 
         return $element;
-
     }
 
     /*******************************************
@@ -200,13 +179,10 @@ abstract class Element extends BaseComponent
     {
 
         if (!$element = $this->freshFindById($id, $siteId)) {
-
             $this->notFoundByIdException($id);
-
         }
 
         return $element;
-
     }
 
 
@@ -236,7 +212,6 @@ abstract class Element extends BaseComponent
         );
 
         return $query;
-
     }
 
     /*******************************************
@@ -252,13 +227,10 @@ abstract class Element extends BaseComponent
     {
 
         if (is_numeric($identifier)) {
-
             return $this->findCacheById($identifier, $siteId);
-
         }
 
         return null;
-
     }
 
     /**
@@ -271,7 +243,6 @@ abstract class Element extends BaseComponent
         $this->cacheById($element);
 
         return $this;
-
     }
 
     /**
@@ -289,13 +260,10 @@ abstract class Element extends BaseComponent
 
         // Check if already in addToCache
         if ($this->isCachedById($id, $siteId)) {
-
             return $this->_cacheById[$siteId][$id];
-
         }
 
         return null;
-
     }
 
     /**
@@ -332,14 +300,11 @@ abstract class Element extends BaseComponent
 
         // Check if already in cache
         if (!$this->isCachedById($id, $siteId)) {
-
             // Cache it
             $this->_cacheById[$siteId][$id] = $element;
-
         }
 
         return $this;
-
     }
 
     /*******************************************
@@ -357,7 +322,6 @@ abstract class Element extends BaseComponent
                 "Element does not exist."
             )
         );
-
     }
 
     /**
@@ -373,7 +337,5 @@ abstract class Element extends BaseComponent
                 (string)$id
             )
         );
-
     }
-
 }

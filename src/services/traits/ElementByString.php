@@ -51,7 +51,6 @@ trait ElementByString
         $property = $this->stringProperty();
 
         return $element->{$property};
-
     }
 
     /**
@@ -64,24 +63,17 @@ trait ElementByString
 
         // Check cache
         if (!$element = $this->findCacheByString($string)) {
-
             // Find new element
             if ($element = $this->freshFindByString($string, $siteId)) {
-
                 // Cache it
                 $this->cacheByString($element);
-
             } else {
-
                 // Cache nothing
                 $this->_cacheByString[$string] = $element;
-
             }
-
         }
 
         return $element;
-
     }
 
     /**
@@ -95,13 +87,10 @@ trait ElementByString
 
         // Find by Handle
         if (!$element = $this->findByString($string, $siteId)) {
-
             $this->notFoundByStringException($string);
-
         }
 
         return $element;
-
     }
 
 
@@ -115,13 +104,10 @@ trait ElementByString
     {
 
         if (!$element = $this->freshFindByString($string, $siteId)) {
-
             $this->notFoundByStringException($string);
-
         }
 
         return $element;
-
     }
 
 
@@ -141,13 +127,10 @@ trait ElementByString
 
         // Check if already in cache
         if ($this->isCachedByString($string, $siteId)) {
-
             return $this->_cacheByString[$siteId][$string];
-
         }
 
         return null;
-
     }
 
     /**
@@ -168,7 +151,6 @@ trait ElementByString
         }
 
         return array_key_exists($string, $this->_cacheByString[$siteId]);
-
     }
 
     /**
@@ -191,14 +173,11 @@ trait ElementByString
 
         // Check if already in cache
         if ($stringValue && !$this->isCachedByString($stringValue, $siteId)) {
-
             // Cache it
             $this->_cacheByString[$siteId][$stringValue] = $element;
-
         }
 
         return $this;
-
     }
 
 
@@ -221,7 +200,5 @@ trait ElementByString
                 (string)$string
             )
         );
-
     }
-
 }

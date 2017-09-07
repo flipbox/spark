@@ -78,7 +78,5 @@ abstract class Record extends BaseRecord
                 ]
             ]
         );
-
     }
-
 }

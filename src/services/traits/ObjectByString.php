@@ -57,7 +57,6 @@ trait ObjectByString
         $property = $this->stringProperty();
 
         return $object->{$property};
-
     }
 
     /*******************************************
@@ -74,24 +73,17 @@ trait ObjectByString
 
         // Check cache
         if (!$model = $this->findCacheByString($string)) {
-
             // Find record in db
             if ($record = $this->findRecordByString($string)) {
-
                 $model = $this->findByRecord($record, $toScenario);
-
             } else {
-
                 $this->_cacheByString[$string] = null;
 
                 return null;
-
             }
-
         }
 
         return $model;
-
     }
 
     /**
@@ -104,13 +96,10 @@ trait ObjectByString
     {
 
         if (!$model = $this->findByString($string, $toScenario)) {
-
             $this->notFoundByStringException($string);
-
         }
 
         return $model;
-
     }
 
     /**
@@ -127,7 +116,6 @@ trait ObjectByString
         }
 
         return $this->createFromRecord($record, $toScenario);
-
     }
 
     /**
@@ -140,13 +128,10 @@ trait ObjectByString
     {
 
         if (!$model = $this->freshFindByString($string, $toScenario)) {
-
             $this->notFoundByStringException($string);
-
         }
 
         return $model;
-
     }
 
     /*******************************************
@@ -168,7 +153,6 @@ trait ObjectByString
         }
 
         return $this->_cacheByString[$string];
-
     }
 
     /**
@@ -198,14 +182,11 @@ trait ObjectByString
 
         // Check if already in cache
         if (!$this->isCachedByString($stringValue)) {
-
             // Cache it
             $this->_cacheByString[$stringValue] = $model;
-
         }
 
         return $this;
-
     }
 
     /**
@@ -224,7 +205,6 @@ trait ObjectByString
         }
 
         return $this->findCacheByString($stringValue);
-
     }
 
     /*******************************************
@@ -245,7 +225,6 @@ trait ObjectByString
             ],
             $toScenario
         );
-
     }
 
     /**
@@ -258,13 +237,10 @@ trait ObjectByString
     {
 
         if (!$record = $this->findRecordByString($string, $toScenario)) {
-
             $this->notFoundRecordByStringException($string);
-
         }
 
         return $record;
-
     }
 
     /*******************************************
@@ -284,7 +260,6 @@ trait ObjectByString
                 (string)$string
             )
         );
-
     }
 
     /**
@@ -300,7 +275,5 @@ trait ObjectByString
                 (string)$string
             )
         );
-
     }
-
 }

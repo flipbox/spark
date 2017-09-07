@@ -35,7 +35,6 @@ abstract class ModelByString extends Model
         }
 
         return $this->findByString($identifier, $toScenario);
-
     }
 
     /*******************************************
@@ -57,7 +56,6 @@ abstract class ModelByString extends Model
         }
 
         return $this->findCacheByString($identifier);
-
     }
 
     /**
@@ -71,7 +69,6 @@ abstract class ModelByString extends Model
         $this->cacheByString($model);
 
         return $this;
-
     }
 
 
@@ -86,7 +83,6 @@ abstract class ModelByString extends Model
         }
 
         return $this->findCacheByRecordByString($record);
-
     }
 
     /*******************************************
@@ -100,7 +96,7 @@ abstract class ModelByString extends Model
     public function findRecordByModel(BaseModel $model)
     {
 
-        if($record = parent::findRecordByModel($model)) {
+        if ($record = parent::findRecordByModel($model)) {
             return $record;
         }
 
@@ -111,7 +107,5 @@ abstract class ModelByString extends Model
         }
 
         return $this->findRecordByString($stringValue);
-
     }
-
 }
