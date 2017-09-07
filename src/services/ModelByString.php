@@ -106,7 +106,7 @@ abstract class ModelByString extends Model
 
         $stringValue = $this->stringValue($model);
 
-        if ($stringValue !== null) {
+        if ($stringValue === null) {
             return null;
         }
 
