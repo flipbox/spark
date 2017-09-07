@@ -1,6 +1,10 @@
 Changelog
 =========
 
+## Unreleased
+### Fixed
+- Bug where model service was returning a new record when an existing record exists
+
 ## [1.0.0-beta.4] - 2017-7-10
 ### Changed
 - ArrayHelper::firstValue compatibility with Craft beta.21

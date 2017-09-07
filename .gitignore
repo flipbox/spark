@@ -1,8 +1,7 @@
 *.idea/*
 *.log
-*.bak
 *.DS_Store
-*.orig
 *Thumbs.db
+tests/_output/*
 vendor/
-composer.lock
+/composer.lock
