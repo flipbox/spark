@@ -23,5 +23,4 @@ class ObjectNotFoundException extends Exception
     {
         return 'Object Not Found Exception';
     }
-
 }

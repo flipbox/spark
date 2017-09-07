@@ -23,5 +23,4 @@ class ModelNotFoundException extends Exception
     {
         return 'Model Not Found Exception';
     }
-
 }

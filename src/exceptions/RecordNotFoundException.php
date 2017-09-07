@@ -23,5 +23,4 @@ class RecordNotFoundException extends Exception
     {
         return 'Record Not Found Exception';
     }
-
 }
