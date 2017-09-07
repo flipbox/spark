@@ -57,8 +57,11 @@ class ElementHelper extends BaseElementHelper
      * @throws InvalidConfigException
      * @return ElementInterface
      */
-    public static function create($config, $instanceOf = null, string $toScenario = null): ElementInterface
-    {
+    public static function create(
+        $config,
+        $instanceOf = null,
+        string $toScenario = null
+    ): ElementInterface {
 
         // Get class from config
         $class = ObjectHelper::checkConfig($config, $instanceOf);
@@ -75,8 +78,11 @@ class ElementHelper extends BaseElementHelper
      * @param string|null $toScenario
      * @return ElementInterface
      */
-    public static function populate(ElementInterface $element, $attributes = [], string $toScenario = null): ElementInterface
-    {
+    public static function populate(
+        ElementInterface $element,
+        $attributes = [],
+        string $toScenario = null
+    ): ElementInterface {
 
         /** @var Element $element */
 

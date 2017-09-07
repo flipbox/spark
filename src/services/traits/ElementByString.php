@@ -23,7 +23,7 @@ trait ElementByString
     /**
      * @var [ElementInterface[]]
      */
-    protected $_cacheByString = [];
+    protected $cacheByString = [];
 
     /*******************************************
      * ABSTRACTS
@@ -69,7 +69,7 @@ trait ElementByString
                 $this->cacheByString($element);
             } else {
                 // Cache nothing
-                $this->_cacheByString[$string] = $element;
+                $this->cacheByString[$string] = $element;
             }
         }
 
@@ -127,7 +127,7 @@ trait ElementByString
 
         // Check if already in cache
         if ($this->isCachedByString($string, $siteId)) {
-            return $this->_cacheByString[$siteId][$string];
+            return $this->cacheByString[$siteId][$string];
         }
 
         return null;
@@ -146,11 +146,11 @@ trait ElementByString
         // Resolve siteId
         $siteId = SiteHelper::resolveSiteId($siteId);
 
-        if (!isset($this->_cacheByString[$siteId])) {
-            $this->_cacheByString[$siteId] = [];
+        if (!isset($this->cacheByString[$siteId])) {
+            $this->cacheByString[$siteId] = [];
         }
 
-        return array_key_exists($string, $this->_cacheByString[$siteId]);
+        return array_key_exists($string, $this->cacheByString[$siteId]);
     }
 
     /**
@@ -174,7 +174,7 @@ trait ElementByString
         // Check if already in cache
         if ($stringValue && !$this->isCachedByString($stringValue, $siteId)) {
             // Cache it
-            $this->_cacheByString[$siteId][$stringValue] = $element;
+            $this->cacheByString[$siteId][$stringValue] = $element;
         }
 
         return $this;

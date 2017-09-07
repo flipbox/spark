@@ -25,7 +25,7 @@ trait ObjectByString
     /**
      * @var BaseObject[]
      */
-    protected $_cacheByString = [];
+    protected $cacheByString = [];
 
     /**
      * @return string
@@ -77,7 +77,7 @@ trait ObjectByString
             if ($record = $this->findRecordByString($string)) {
                 $model = $this->findByRecord($record, $toScenario);
             } else {
-                $this->_cacheByString[$string] = null;
+                $this->cacheByString[$string] = null;
 
                 return null;
             }
@@ -152,7 +152,7 @@ trait ObjectByString
             return null;
         }
 
-        return $this->_cacheByString[$string];
+        return $this->cacheByString[$string];
     }
 
     /**
@@ -163,7 +163,7 @@ trait ObjectByString
      */
     private function isCachedByString(string $string): bool
     {
-        return array_key_exists($string, $this->_cacheByString);
+        return array_key_exists($string, $this->cacheByString);
     }
 
 
@@ -183,7 +183,7 @@ trait ObjectByString
         // Check if already in cache
         if (!$this->isCachedByString($stringValue)) {
             // Cache it
-            $this->_cacheByString[$stringValue] = $model;
+            $this->cacheByString[$stringValue] = $model;
         }
 
         return $this;

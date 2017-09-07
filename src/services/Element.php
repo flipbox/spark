@@ -28,7 +28,7 @@ abstract class Element extends BaseComponent
     /**
      * @var [ElementInterface[]]
      */
-    protected $_cacheById = [];
+    protected $cacheById = [];
 
     /*******************************************
      * ELEMENT CLASSES
@@ -110,7 +110,7 @@ abstract class Element extends BaseComponent
                 $this->addToCache($element);
             } else {
                 // Cache nothing
-                $this->_cacheById[$id] = $element;
+                $this->cacheById[$id] = $element;
             }
         }
 
@@ -260,7 +260,7 @@ abstract class Element extends BaseComponent
 
         // Check if already in addToCache
         if ($this->isCachedById($id, $siteId)) {
-            return $this->_cacheById[$siteId][$id];
+            return $this->cacheById[$siteId][$id];
         }
 
         return null;
@@ -278,11 +278,11 @@ abstract class Element extends BaseComponent
         // Resolve siteId
         $siteId = SiteHelper::resolveSiteId($siteId);
 
-        if (!isset($this->_cacheById[$siteId])) {
-            $this->_cacheById[$siteId] = [];
+        if (!isset($this->cacheById[$siteId])) {
+            $this->cacheById[$siteId] = [];
         }
 
-        return array_key_exists($id, $this->_cacheById[$siteId]);
+        return array_key_exists($id, $this->cacheById[$siteId]);
     }
 
     /**
@@ -301,7 +301,7 @@ abstract class Element extends BaseComponent
         // Check if already in cache
         if (!$this->isCachedById($id, $siteId)) {
             // Cache it
-            $this->_cacheById[$siteId][$id] = $element;
+            $this->cacheById[$siteId][$id] = $element;
         }
 
         return $this;

@@ -58,7 +58,8 @@ class LoggingHelper
      */
     public static function isDebugModeEnabled(Module $module)
     {
-        return Craft::$app->getConfig()->getGeneral()->devMode || ($module instanceof LoggableInterface && $module->isDebugModeEnabled());
+        return Craft::$app->getConfig()->getGeneral()->devMode ||
+            ($module instanceof LoggableInterface && $module->isDebugModeEnabled());
     }
 
     /**

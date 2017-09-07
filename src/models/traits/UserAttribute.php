@@ -22,12 +22,12 @@ trait UserTrait
     /**
      * @var int|null
      */
-    private $_userId;
+    private $userId;
 
     /**
      * @var UserElement|null
      */
-    private $_user;
+    private $user;
 
     /**
      * Set associated userId
@@ -39,13 +39,13 @@ trait UserTrait
     {
 
         // Has the id changed?
-        if ($id !== $this->_userId) {
+        if ($id !== $this->userId) {
             // Invalidate existing user
-            if ($this->_user !== null && $this->_user->getId() !== $id) {
-                $this->_user = null;
+            if ($this->user !== null && $this->user->getId() !== $id) {
+                $this->user = null;
             };
 
-            $this->_userId = $id;
+            $this->userId = $id;
         }
 
         return $this;
@@ -58,7 +58,7 @@ trait UserTrait
      */
     public function getUserId()
     {
-        return $this->_userId;
+        return $this->userId;
     }
 
 
@@ -72,18 +72,18 @@ trait UserTrait
     {
 
         // Clear cache
-        $this->_user = null;
+        $this->user = null;
 
         // Find element
         if (!$user = $this->findUserElement($user)) {
             // Clear property / cache
-            $this->_userId = $this->_user = null;
+            $this->userId = $this->user = null;
         } else {
             // Set property
-            $this->_userId = $user->getId();
+            $this->userId = $user->getId();
 
             // Set cache
-            $this->_user = $user;
+            $this->user = $user;
         }
 
         return $this;
@@ -96,27 +96,27 @@ trait UserTrait
     {
 
         // Check cache
-        if (is_null($this->_user)) {
+        if (is_null($this->user)) {
             // Check property
-            if (!empty($this->_userId)) {
+            if (!empty($this->userId)) {
                 // Find element
-                if ($userElement = Craft::$app->getUsers()->getUserById($this->_userId)) {
+                if ($userElement = Craft::$app->getUsers()->getUserById($this->userId)) {
                     // Set
                     $this->setUser($userElement);
                 } else {
                     // Clear property (it's invalid)
-                    $this->_userId = null;
+                    $this->userId = null;
 
                     // Prevent subsequent look-ups
-                    $this->_user = false;
+                    $this->user = false;
                 }
             } else {
                 // Prevent subsequent look-ups
-                $this->_user = false;
+                $this->user = false;
             }
         }
 
-        return !$this->_user ? null : $this->_user;
+        return !$this->user ? null : $this->user;
     }
 
     /**

@@ -18,7 +18,7 @@ use DateTime;
 trait DateCreatedAttribute
 {
 
-    private $_dateCreated;
+    private $dateCreated;
 
     /**
      * @param $value
@@ -31,7 +31,7 @@ trait DateCreatedAttribute
             $value = DateTimehelper::toDateTime($value);
         }
 
-        $this->_dateCreated = $value ?: null;
+        $this->dateCreated = $value ?: null;
 
         return $this;
     }
@@ -42,13 +42,13 @@ trait DateCreatedAttribute
     public function getDateCreated()
     {
 
-        if (empty($this->_dateCreated)) {
+        if (empty($this->dateCreated)) {
             return DateTimeHelper::toDateTime(
                 new DateTime('now')
             );
         }
 
-        return $this->_dateCreated;
+        return $this->dateCreated;
     }
 
     /**

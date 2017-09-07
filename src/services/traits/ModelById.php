@@ -29,7 +29,7 @@ trait ModelById
     /**
      * @var ModelWithId[]
      */
-    protected $_cacheById = [];
+    protected $cacheById = [];
 
     /**
      * @param Record $record
@@ -63,7 +63,7 @@ trait ModelById
             if ($record = $this->findRecordById($id)) {
                 $model = $this->findByRecord($record, $toScenario);
             } else {
-                $this->_cacheById[$id] = null;
+                $this->cacheById[$id] = null;
 
                 return null;
             }
@@ -140,7 +140,7 @@ trait ModelById
             return null;
         }
 
-        return $this->_cacheById[$id];
+        return $this->cacheById[$id];
     }
 
     /**
@@ -151,7 +151,7 @@ trait ModelById
      */
     private function isCachedById(int $id): bool
     {
-        return array_key_exists($id, $this->_cacheById);
+        return array_key_exists($id, $this->cacheById);
     }
 
 
@@ -169,7 +169,7 @@ trait ModelById
         // Check if already in cache
         if (!$this->isCachedById($model->getId())) {
             // Cache it
-            $this->_cacheById[$model->getId()] = $model;
+            $this->cacheById[$model->getId()] = $model;
         }
 
         return $this;

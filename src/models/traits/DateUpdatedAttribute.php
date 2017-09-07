@@ -18,7 +18,7 @@ use DateTime;
 trait DateUpdatedAttribute
 {
 
-    private $_dateUpdated;
+    private $dateUpdated;
 
     /**
      * @param $value
@@ -31,7 +31,7 @@ trait DateUpdatedAttribute
             $value = DateTimeHelper::toDateTime($value);
         }
 
-        $this->_dateUpdated = $value ?: null;
+        $this->dateUpdated = $value ?: null;
 
         return $this;
     }
@@ -42,13 +42,13 @@ trait DateUpdatedAttribute
     public function getDateUpdated()
     {
 
-        if (empty($this->_dateUpdated)) {
+        if (empty($this->dateUpdated)) {
             return DateTimeHelper::toDateTime(
                 new DateTime('now')
             );
         }
 
-        return $this->_dateUpdated;
+        return $this->dateUpdated;
     }
 
     /**

@@ -20,7 +20,7 @@ use yii\log\Logger;
 trait LoggableTrait
 {
 
-    private static $_dispatcher;
+    private static $dispatcher;
 
     /**
      * @inheritdoc
@@ -52,11 +52,11 @@ trait LoggableTrait
      */
     public static function getDispatcher()
     {
-        if (self::$_dispatcher !== null) {
-            return self::$_dispatcher;
+        if (self::$dispatcher !== null) {
+            return self::$dispatcher;
         } else {
             static::setDispatcher();
-            return static::$_dispatcher;
+            return static::$dispatcher;
         }
     }
 
@@ -76,7 +76,7 @@ trait LoggableTrait
             );
         }
 
-        self::$_dispatcher = $dispatcher;
+        self::$dispatcher = $dispatcher;
     }
 
     /**

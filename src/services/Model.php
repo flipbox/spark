@@ -31,7 +31,7 @@ abstract class Model extends Component
     /**
      * @var BaseModel[]
      */
-    protected $_cacheAll;
+    protected $cacheAll;
 
 
     /*******************************************
@@ -121,18 +121,18 @@ abstract class Model extends Component
     {
 
         // Check addToCache
-        if (is_null($this->_cacheAll)) {
-            $this->_cacheAll = [];
+        if (is_null($this->cacheAll)) {
+            $this->cacheAll = [];
 
             // Find record in db
             if ($records = $this->findAllRecords()) {
                 foreach ($records as $record) {
-                    $this->_cacheAll[] = $this->findByRecord($record, $toScenario);
+                    $this->cacheAll[] = $this->findByRecord($record, $toScenario);
                 }
             }
         }
 
-        return $this->_cacheAll;
+        return $this->cacheAll;
     }
 
     /**
