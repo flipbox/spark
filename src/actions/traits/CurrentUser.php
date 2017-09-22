@@ -36,7 +36,7 @@ trait CurrentUser
      */
     protected function getUser()
     {
-        if(($currentUser = $this->findUser()) === null) {
+        if (($currentUser = $this->findUser()) === null) {
             return $this->handleUserNotFoundResponse();
         };
 

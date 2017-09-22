@@ -86,7 +86,7 @@ class ModelFilter extends ActionFilter
             return $model;
         }
 
-        if($model->hasErrors()) {
+        if ($model->hasErrors()) {
             Craft::$app->getSession()->setError(
                 $this->resolveFailMessage($handler)
             );

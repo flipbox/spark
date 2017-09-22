@@ -14,7 +14,7 @@
          * @param {object|undefined} options
          * @return jqXHR
          */
-        actionRequest: function(method, action, data, callback, options) {
+        actionRequest: function (method, action, data, callback, options) {
             // Make 'data' optional
             if (typeof data === 'function') {
                 options = callback;
@@ -35,11 +35,10 @@
                 headers: headers,
                 data: data,
                 success: callback,
-                error: function(jqXHR, textStatus) {
+                error: function (jqXHR, textStatus) {
                     if (typeof Craft.cp !== 'undefined') {
                         Craft.cp.displayError();
-                    }
-                    else {
+                    } else {
                         alert(Craft.t('app', 'An unknown error occurred.'));
                     }
                     if (callback) {
@@ -55,13 +54,13 @@
 
             return jqXHR;
         },
-        deleteActionRequest: function(action, data, callback, options) {
+        deleteActionRequest: function (action, data, callback, options) {
             return Craft.actionRequest('DELETE', action, data, callback, options);
         },
-        putActionRequest: function(action, data, callback, options) {
+        putActionRequest: function (action, data, callback, options) {
             return Craft.actionRequest('PUT', action, data, callback, options);
         },
-        patchActionRequest: function(action, data, callback, options) {
+        patchActionRequest: function (action, data, callback, options) {
             return Craft.actionRequest('PUT', action, data, callback, options);
         }
     });

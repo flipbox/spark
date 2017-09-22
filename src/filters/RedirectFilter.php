@@ -37,7 +37,7 @@ class RedirectFilter extends ActionFilter
     public function afterAction($action, $result)
     {
         if (Craft::$app->getResponse()->format === Response::FORMAT_RAW) {
-            if($result !== null || ($this->allowNull === true)) {
+            if ($result !== null || ($this->allowNull === true)) {
                 return ControllerHelper::redirectToPostedUrl(
                     $action->controller,
                     $result

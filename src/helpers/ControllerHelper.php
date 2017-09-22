@@ -25,8 +25,11 @@ class ControllerHelper
      * @param string|null $default
      * @return \yii\web\Response|\craft\web\Response
      */
-    public static function redirectToPostedUrl(WebController $controller, $object = null, string $default = null): Response
-    {
+    public static function redirectToPostedUrl(
+        WebController $controller,
+        $object = null,
+        string $default = null
+    ): Response {
         if ($controller instanceof CraftWebController) {
             return $controller->redirectToPostedUrl($object, $default);
         }
