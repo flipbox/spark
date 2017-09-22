@@ -5,6 +5,14 @@ Changelog
 ### Fixed
 - Bug where model service was returning a new record when an existing record exists
 
+### Added
+- Various action traits
+- An abstract controller to assist with more robust action and response handling
+- Various action based js methods to assist with CP calls using correct verbs
+- An abstract view handler to assist w/ switching between rendering an admin template and a front-end template
+- Filters to assist with preparing data and responses
+- Some helpers to help us out
+
 ## [1.0.0-beta.4] - 2017-7-10
 ### Changed
 - ArrayHelper::firstValue compatibility with Craft beta.21
