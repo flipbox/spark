@@ -1,5 +1,9 @@
 Changelog
 =========
+## Unreleased
+### Added
+- Model query class that returns models 
+- Object query class that returns objects 
 
 ## [1.0.0-beta.5] - 2017-09-22
 ### Fixed

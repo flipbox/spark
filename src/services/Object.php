@@ -9,14 +9,17 @@
 namespace flipbox\spark\services;
 
 use craft\helpers\Json as JsonHelper;
+use flipbox\spark\db\ActiveObjectQuery;
 use flipbox\spark\exceptions\ObjectNotFoundException;
 use flipbox\spark\helpers\ArrayHelper;
 use flipbox\spark\helpers\ObjectHelper;
+use flipbox\spark\helpers\QueryHelper;
 use flipbox\spark\Records\Record;
 use yii\base\Component;
 use yii\base\InvalidConfigException;
 use yii\base\Object as BaseObject;
 use yii\db\QueryInterface;
+use Yii;
 
 /**
  * @author Flipbox Factory <hello@flipboxfactory.com>
@@ -47,6 +50,37 @@ abstract class Object extends Component
     public static function objectClassInstance(): string
     {
         return BaseObject::class;
+    }
+
+    /*******************************************
+     * QUERY
+     *******************************************/
+
+    /**
+     * @param array $config
+     * @return ActiveObjectQuery
+     */
+    public function getQuery($config = []): ActiveObjectQuery
+    {
+        /** @var ActiveObjectQuery $query */
+        $query = Yii::createObject(
+            ActiveObjectQuery::class,
+            [
+                $this->recordClass(),
+                [
+                    'serviceClass' => $this
+                ]
+            ]
+        );
+
+        if ($config) {
+            QueryHelper::configure(
+                $query,
+                $config
+            );
+        }
+
+        return $query;
     }
 
     /*******************************************
@@ -377,6 +411,39 @@ abstract class Object extends Component
     /*******************************************
      * FIND/GET BY RECORD
      *******************************************/
+
+    /**
+     * @param array $records
+     * @param string|null $toScenario
+     * @return BaseObject[]
+     */
+    public function findAllByRecords(array $records, string $toScenario = null): array
+    {
+        $models = [];
+
+        foreach($records as $index => $record) {
+            $models[$index] = $this->findByRecord($record, $toScenario);
+        }
+
+        return $models;
+    }
+
+    /**
+     * @param array $records
+     * @param string|null $toScenario
+     * @return BaseObject[]
+     * @throws ObjectNotFoundException
+     */
+    public function getAllByRecords(array $records, string $toScenario = null): array
+    {
+        $models = $this->findAllByRecords($records, $toScenario);
+
+        if(empty($models)) {
+            throw new ObjectNotFoundException("Unable to get from records.");
+        }
+
+        return $models;
+    }
 
     /**
      * @param Record $record

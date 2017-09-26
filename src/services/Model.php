@@ -9,15 +9,18 @@
 namespace flipbox\spark\services;
 
 use craft\helpers\Json as JsonHelper;
+use flipbox\spark\db\ActiveModelQuery;
 use flipbox\spark\exceptions\ModelNotFoundException;
 use flipbox\spark\exceptions\RecordNotFoundException;
 use flipbox\spark\helpers\ArrayHelper;
 use flipbox\spark\helpers\ModelHelper;
+use flipbox\spark\helpers\QueryHelper;
 use flipbox\spark\models\Model as BaseModel;
 use flipbox\spark\records\Record;
 use yii\base\Component;
 use yii\base\InvalidConfigException;
 use yii\db\QueryInterface;
+use Yii;
 
 /**
  * @author Flipbox Factory <hello@flipboxfactory.com>
@@ -32,7 +35,6 @@ abstract class Model extends Component
      * @var BaseModel[]
      */
     protected $cacheAll;
-
 
     /*******************************************
      * MODEL CLASSES
@@ -49,6 +51,37 @@ abstract class Model extends Component
     public static function modelClassInstance(): string
     {
         return BaseModel::class;
+    }
+
+    /*******************************************
+     * QUERY
+     *******************************************/
+
+    /**
+     * @param array $config
+     * @return ActiveModelQuery
+     */
+    public function getQuery($config = []): ActiveModelQuery
+    {
+        /** @var ActiveModelQuery $query */
+        $query = Yii::createObject(
+            ActiveModelQuery::class,
+            [
+                $this->recordClass(),
+                [
+                    'serviceClass' => $this
+                ]
+            ]
+        );
+
+        if ($config) {
+            QueryHelper::configure(
+                $query,
+                $config
+            );
+        }
+
+        return $query;
     }
 
     /*******************************************
@@ -101,6 +134,11 @@ abstract class Model extends Component
 
         /** @var BaseModel $model */
         $model = new $modelClass($record);
+
+        // Any eager loaded relations
+        if($relations = $record->getRelatedRecords()) {
+            $model->setAttributes($relations);
+        }
 
         if (null !== $toScenario) {
             $model->setScenario($toScenario);
@@ -382,19 +420,47 @@ abstract class Model extends Component
      *******************************************/
 
     /**
+     * @param array $records
+     * @param string|null $toScenario
+     * @return BaseModel[]
+     */
+    public function findAllByRecords(array $records, string $toScenario = null): array
+    {
+        $models = [];
+
+        foreach($records as $index => $record) {
+            $models[$index] = $this->findByRecord($record, $toScenario);
+        }
+
+        return $models;
+    }
+
+    /**
+     * @param array $records
+     * @param string|null $toScenario
+     * @return BaseModel[]
+     * @throws ModelNotFoundException
+     */
+    public function getAllByRecords(array $records, string $toScenario = null): array
+    {
+        $models = $this->findAllByRecords($records, $toScenario);
+
+        if(empty($models)) {
+            throw new ModelNotFoundException("Unable to get from records.");
+        }
+
+        return $models;
+    }
+
+    /**
      * @param Record $record
      * @param string $toScenario
      * @return BaseModel
      */
     public function findByRecord(Record $record, string $toScenario = null): BaseModel
     {
-
-        // Check addToCache
         if (!$model = $this->findCacheByRecord($record)) {
-            // New model
             $model = $this->createFromRecord($record, $toScenario);
-
-            // Cache it
             $this->addToCache($model);
         }
 
