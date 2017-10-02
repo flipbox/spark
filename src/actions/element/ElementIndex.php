@@ -2,59 +2,32 @@
 
 namespace flipbox\spark\actions\element;
 
-use Craft;
-use flipbox\spark\actions\traits\PrepareData;
-use yii\data\ActiveDataProvider;
+use craft\helpers\ArrayHelper;
+use flipbox\spark\actions\base\traits\IndexAction;
 use yii\data\DataProviderInterface;
-use yii\db\QueryInterface;
 
 abstract class ElementIndex extends AbstractElement
 {
-    use PrepareData;
-
-    /**
-     * @param array $config
-     * @return QueryInterface
-     */
-    abstract protected function assembleQuery(array $config = []): QueryInterface;
+    use IndexAction;
 
     /**
      * @return DataProviderInterface
      */
     public function run(): DataProviderInterface
     {
-        $dataProvider = $this->assembleDataProvider();
-
-        // Check access
-        if (($access = $this->checkAccess($dataProvider)) !== true) {
-            return $access;
-        }
-
-        return $this->performAction($dataProvider);
-    }
-
-    /**
-     * @param DataProviderInterface $dataProvider
-     * @return DataProviderInterface
-     */
-    protected function performAction(DataProviderInterface $dataProvider): DataProviderInterface
-    {
-        // Allow alterations to the data
-        $this->prepareData($dataProvider);
-
-        Craft::$app->getResponse()->setStatusCode($this->statusCodeSuccess);
-
-        return $dataProvider;
+        return $this->runInternal(
+            $this->assembleDataProvider()
+        );
     }
 
     /**
      * @param array $config
-     * @return DataProviderInterface
+     * @return array
      */
-    protected function assembleDataProvider(array $config = []): DataProviderInterface
+    protected function normalizeQueryConfig(array $config = []): array
     {
-        return new ActiveDataProvider([
-            'query' => $this->assembleQuery($config)
-        ]);
+        // OrderBy should be an array, not an empty string (which is set in the default element query)
+        $config['orderBy'] = ArrayHelper::getValue($config, 'orderBy', []);
+        return $config;
     }
 }

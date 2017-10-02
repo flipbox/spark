@@ -7,13 +7,6 @@ use Craft;
 trait Populate
 {
     /**
-     * These are the default body params that we're accepting.  You can lock down specific fact attributes this way.
-     *
-     * @return array
-     */
-    abstract protected function validBodyParams(): array;
-
-    /**
      * @param $object
      * @return $object
      */
@@ -49,4 +42,11 @@ trait Populate
 
         return $attributes;
     }
+
+    /**
+     * These are the default body params that we're accepting.  You can lock down specific fact attributes this way.
+     *
+     * @return array
+     */
+    abstract protected function validBodyParams(): array;
 }

@@ -17,9 +17,11 @@ use yii\web\HttpException;
 trait CheckAccess
 {
     /**
+     * HTTP forbidden response code
+     *
      * @var int
      */
-    public $accessCodeUnauthorized = 403;
+    public $statusCodeUnauthorized = 403;
 
     /**
      * @var null|callable
@@ -47,7 +49,7 @@ trait CheckAccess
     protected function handleUnauthorizedResponse()
     {
         throw new HttpException(
-            $this->accessCodeUnauthorized,
+            $this->statusCodeUnauthorized,
             'Unable to perform action.'
         );
     }

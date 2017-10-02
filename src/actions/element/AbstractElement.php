@@ -4,7 +4,7 @@ namespace flipbox\spark\actions\element;
 
 use Craft;
 use craft\base\ElementInterface;
-use flipbox\restful\actions\AbstractAction;
+use flipbox\spark\actions\AbstractAction;
 
 abstract class AbstractElement extends AbstractAction
 {
