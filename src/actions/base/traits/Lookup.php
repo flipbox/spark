@@ -1,6 +1,6 @@
 <?php
 
-namespace flipbox\spark\actions\traits;
+namespace flipbox\spark\actions\base\traits;
 
 use Craft;
 use yii\base\Model;
@@ -23,7 +23,7 @@ trait Lookup
 
     /**
      * @param int $id
-     * @return null
+     * @return null|Model
      */
     abstract protected function findById(int $id);
 

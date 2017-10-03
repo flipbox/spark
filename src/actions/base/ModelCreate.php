@@ -1,15 +1,14 @@
 <?php
 
-namespace flipbox\spark\actions\model;
+namespace flipbox\spark\actions\base;
 
-use flipbox\spark\actions\base\traits\SaveAction;
 use yii\base\Action;
 use yii\base\Model;
 use yii\web\Response;
 
 abstract class ModelCreate extends Action
 {
-    use SaveAction;
+    use traits\SaveAction;
 
     /**
      * @param array $config

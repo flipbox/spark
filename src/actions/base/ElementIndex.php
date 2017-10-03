@@ -1,12 +1,13 @@
 <?php
 
-namespace flipbox\spark\actions\element;
+namespace flipbox\spark\actions\base;
 
 use craft\helpers\ArrayHelper;
 use flipbox\spark\actions\base\traits\IndexAction;
+use yii\base\Action;
 use yii\data\DataProviderInterface;
 
-abstract class ElementIndex extends AbstractElement
+abstract class ElementIndex extends Action
 {
     use IndexAction;
 
