@@ -1,14 +1,13 @@
 <?php
 
-namespace flipbox\spark\actions\base;
+namespace flipbox\spark\actions\model;
 
-use flipbox\spark\actions\base\traits\IndexAction;
 use yii\base\Action;
 use yii\data\DataProviderInterface;
 
 abstract class ModelIndex extends Action
 {
-    use IndexAction;
+    use traits\IndexAction;
 
     /**
      * @return DataProviderInterface

@@ -1,6 +1,6 @@
 <?php
 
-namespace flipbox\spark\actions\base\traits;
+namespace flipbox\spark\actions\model\traits;
 
 use flipbox\spark\actions\traits\CheckAccess;
 use yii\base\Model;

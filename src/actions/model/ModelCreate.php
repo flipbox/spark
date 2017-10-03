@@ -1,6 +1,6 @@
 <?php
 
-namespace flipbox\spark\actions\base;
+namespace flipbox\spark\actions\model;
 
 use yii\base\Action;
 use yii\base\Model;
