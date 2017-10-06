@@ -43,8 +43,7 @@ class RedirectFilter extends ActionFilter
                     $result
                 );
             }
-
-            return parent::afterAction($action, $result);
         }
+        return parent::afterAction($action, $result);
     }
 }

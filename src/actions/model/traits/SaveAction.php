@@ -16,7 +16,7 @@ trait SaveAction
      *
      * @var int
      */
-    public $statusCodeSuccess = 201;
+    public $statusCodeSuccess = 200;
 
     /**
      * HTTP fail response code
@@ -52,13 +52,29 @@ trait SaveAction
     }
 
     /**
+     * @return int
+     */
+    protected function statusCodeSuccess(): int
+    {
+        return $this->statusCodeSuccess;
+    }
+
+    /**
+     * @return int
+     */
+    protected function statusCodeFail(): int
+    {
+        return $this->statusCodeFail;
+    }
+
+    /**
      * @param Model $model
      * @return Model
      */
     protected function handleSuccessResponse(Model $model)
     {
         // Success status code
-        Craft::$app->getResponse()->setStatusCode($this->statusCodeSuccess);
+        Craft::$app->getResponse()->setStatusCode($this->statusCodeSuccess());
         return $model;
     }
 
@@ -68,7 +84,7 @@ trait SaveAction
      */
     protected function handleFailResponse(Model $model)
     {
-        Craft::$app->getResponse()->setStatusCode($this->statusCodeFail);
+        Craft::$app->getResponse()->setStatusCode($this->statusCodeFail());
         return $model;
     }
 }

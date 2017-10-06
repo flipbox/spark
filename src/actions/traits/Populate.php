@@ -3,26 +3,26 @@
 namespace flipbox\spark\actions\traits;
 
 use Craft;
-use yii\base\Model;
+use yii\base\Object;
 
 trait Populate
 {
     /**
-     * @param Model $model
-     * @return Model
+     * @param Object $object
+     * @return Object
      */
-    protected function populate(Model $model)
+    protected function populate(Object $object): Object
     {
         // Valid attribute values
         $attributes = $this->attributeValuesFromBody();
 
-        /** @var Model $model */
-        $model = Craft::configure(
-            $model,
+        /** @var Object $object */
+        $object = Craft::configure(
+            $object,
             $attributes
         );
 
-        return $model;
+        return $object;
     }
 
     /**

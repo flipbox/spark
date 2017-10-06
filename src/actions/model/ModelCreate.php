@@ -23,4 +23,12 @@ abstract class ModelCreate extends Action
     {
         return $this->runInternal($this->newModel());
     }
+
+    /**
+     * @inheritdoc
+     */
+    public function statusCodeSuccess(): int
+    {
+        return 201;
+    }
 }
