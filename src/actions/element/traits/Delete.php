@@ -5,7 +5,7 @@ namespace flipbox\spark\actions\element\traits;
 use Craft;
 use yii\base\Model;
 
-trait SaveAction
+trait Delete
 {
     /**
      * @param Model $model
@@ -13,6 +13,6 @@ trait SaveAction
      */
     protected function performAction(Model $model): bool
     {
-        return Craft::$app->getElements()->saveElement($model);
+        return Craft::$app->getElements()->deleteElement($model);
     }
 }

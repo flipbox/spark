@@ -8,7 +8,7 @@ use yii\web\Response;
 
 abstract class ModelCreate extends Action
 {
-    use traits\SaveAction;
+    use traits\Save;
 
     /**
      * @param array $config

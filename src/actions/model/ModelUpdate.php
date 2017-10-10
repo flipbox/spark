@@ -6,10 +6,5 @@ use yii\base\Action;
 
 abstract class ModelUpdate extends Action
 {
-    use traits\SaveAction, traits\Lookup;
-
-    /**
-     * @inheritdoc
-     */
-    public $statusCodeSuccess = 200;
+    use traits\Save, traits\Lookup;
 }

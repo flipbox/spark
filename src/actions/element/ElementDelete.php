@@ -6,5 +6,5 @@ use flipbox\spark\actions\model\ModelDelete;
 
 abstract class ElementDelete extends ModelDelete
 {
-    use traits\DeleteAction, traits\Lookup;
+    use traits\Delete, traits\Lookup;
 }

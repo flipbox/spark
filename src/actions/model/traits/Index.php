@@ -8,7 +8,7 @@ use yii\data\ActiveDataProvider;
 use yii\data\DataProviderInterface;
 use yii\db\QueryInterface;
 
-trait IndexAction
+trait Index
 {
     use PrepareData, CheckAccess;
 

@@ -6,23 +6,15 @@ use Craft;
 use flipbox\spark\actions\traits\CheckAccess;
 use yii\base\Model;
 
-trait DeleteAction
+trait Manage
 {
     use CheckAccess;
 
     /**
-     * HTTP success response code
-     *
-     * @var int
+     * @param Model $model
+     * @return bool
      */
-    public $statusCodeSuccess = 204;
-
-    /**
-     * HTTP fail response code
-     *
-     * @var int
-     */
-    public $statusCodeFail = 401;
+    abstract protected function performAction(Model $model): bool;
 
     /**
      * @param Model $model
@@ -43,10 +35,24 @@ trait DeleteAction
     }
 
     /**
-     * @param Model $model
-     * @return bool
+     * HTTP success response code
+     *
+     * @return int
      */
-    abstract protected function performAction(Model $model): bool;
+    protected function statusCodeSuccess(): int
+    {
+        return 200;
+    }
+
+    /**
+     * HTTP fail response code
+     *
+     * @return int
+     */
+    protected function statusCodeFail(): int
+    {
+        return 400;
+    }
 
     /**
      * @param Model $model
@@ -55,7 +61,7 @@ trait DeleteAction
     protected function handleSuccessResponse(Model $model)
     {
         // Success status code
-        Craft::$app->getResponse()->setStatusCode($this->statusCodeSuccess);
+        Craft::$app->getResponse()->setStatusCode($this->statusCodeSuccess());
         return $model;
     }
 
@@ -65,7 +71,7 @@ trait DeleteAction
      */
     protected function handleFailResponse(Model $model)
     {
-        Craft::$app->getResponse()->setStatusCode($this->statusCodeFail);
+        Craft::$app->getResponse()->setStatusCode($this->statusCodeFail());
         return $model;
     }
 }

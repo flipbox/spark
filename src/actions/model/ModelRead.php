@@ -6,5 +6,5 @@ use yii\base\Action;
 
 abstract class ModelRead extends Action
 {
-    use traits\ViewAction, traits\Lookup;
+    use traits\Read, traits\Lookup;
 }

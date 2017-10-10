@@ -8,6 +8,7 @@
 
 namespace flipbox\spark\actions\traits;
 
+use Craft;
 use yii\web\HttpException;
 
 /**
@@ -16,13 +17,6 @@ use yii\web\HttpException;
  */
 trait CheckAccess
 {
-    /**
-     * HTTP forbidden response code
-     *
-     * @var int
-     */
-    public $statusCodeUnauthorized = 403;
-
     /**
      * @var null|callable
      */
@@ -44,13 +38,31 @@ trait CheckAccess
     }
 
     /**
+     * HTTP forbidden response code
+     *
+     * @return int
+     */
+    protected function statusCodeUnauthorized(): int
+    {
+        return 403;
+    }
+
+    /**
+     * @return string
+     */
+    protected function messageUnauthorized(): string
+    {
+        return Craft::t('app', 'Unable to perform action.');
+    }
+
+    /**
      * @throws HttpException
      */
     protected function handleUnauthorizedResponse()
     {
         throw new HttpException(
-            $this->statusCodeUnauthorized,
-            'Unable to perform action.'
+            $this->statusCodeUnauthorized(),
+            $this->messageUnauthorized()
         );
     }
 }

@@ -6,5 +6,5 @@ use flipbox\spark\actions\model\ModelCreate;
 
 abstract class ElementCreate extends ModelCreate
 {
-    use traits\SaveAction;
+    use traits\Save;
 }

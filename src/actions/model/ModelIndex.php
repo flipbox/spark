@@ -7,7 +7,7 @@ use yii\data\DataProviderInterface;
 
 abstract class ModelIndex extends Action
 {
-    use traits\IndexAction;
+    use traits\Index;
 
     /**
      * @return DataProviderInterface

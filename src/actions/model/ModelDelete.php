@@ -6,5 +6,5 @@ use yii\base\Action;
 
 abstract class ModelDelete extends Action
 {
-    use traits\DeleteAction, traits\Lookup;
+    use traits\Delete, traits\Lookup;
 }

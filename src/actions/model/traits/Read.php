@@ -5,7 +5,7 @@ namespace flipbox\spark\actions\model\traits;
 use flipbox\spark\actions\traits\CheckAccess;
 use yii\base\Model;
 
-trait ViewAction
+trait Read
 {
     use CheckAccess;
 

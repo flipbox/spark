@@ -10,18 +10,6 @@ use yii\web\Response;
 trait Lookup
 {
     /**
-     * @var string
-     */
-    public $messageNotFound = 'Unable to find object.';
-
-    /**
-     * HTTP not found response code
-     *
-     * @var int
-     */
-    public $statusCodeNotFound = 404;
-
-    /**
      * @param int $id
      * @return null|Model
      */
@@ -47,17 +35,32 @@ trait Lookup
     }
 
     /**
+     * @return string
+     */
+    protected function messageNotFound(): string
+    {
+        return Craft::t('app', 'Unable to find object.');
+    }
+
+    /**
+     * HTTP not found response code
+     *
+     * @return int
+     */
+    protected function statusCodeNotFound(): int
+    {
+        return 404;
+    }
+
+    /**
      * @return null
      * @throws HttpException
      */
     protected function handleNotFoundResponse()
     {
         throw new HttpException(
-            $this->statusCodeNotFound,
-            Craft::t(
-                'restful',
-                $this->messageNotFound
-            )
+            $this->statusCodeNotFound(),
+            $this->messageNotFound()
         );
     }
 }

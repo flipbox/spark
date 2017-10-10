@@ -19,11 +19,6 @@ use yii\web\HttpException;
 trait CurrentUser
 {
     /**
-     * @var int
-     */
-    public $accessCodeUserNotFound = 401;
-
-    /**
      * @return UserElement
      */
     protected function findUser()
@@ -44,14 +39,32 @@ trait CurrentUser
     }
 
     /**
+     * HTTP forbidden response code
+     *
+     * @return int
+     */
+    protected function statusCodeUserNotFound(): int
+    {
+        return 401;
+    }
+
+    /**
+     * @return string
+     */
+    protected function messageUserNotFound(): string
+    {
+        return Craft::t('app', 'Unable to establish identity.');
+    }
+
+    /**
      * @throws HttpException
      * @return mixed
      */
     protected function handleUserNotFoundResponse()
     {
         throw new HttpException(
-            $this->accessCodeUserNotFound,
-            'Unable to establish identity.'
+            $this->statusCodeUserNotFound(),
+            $this->messageUserNotFound()
         );
     }
 }
