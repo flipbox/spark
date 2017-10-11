@@ -2,11 +2,9 @@
 
 namespace flipbox\spark\actions\model\traits;
 
-use flipbox\spark\actions\traits\CheckAccess;
-
 trait Delete
 {
-    use CheckAccess, Manage;
+    use Manage;
 
     /**
      * HTTP success response code
