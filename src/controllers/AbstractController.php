@@ -29,12 +29,22 @@ abstract class AbstractController extends Controller
     {
         parent::init();
 
-        Craft::$app->getRequest()->parsers = array_merge(
-            Craft::$app->getRequest()->parsers,
-            [
-                'application/json' => JsonParser::class
-            ]
-        );
+        // Add json parser (to accept json encoded body)
+        $parsers = Craft::$app->getRequest()->parsers;
+        if(!array_key_exists('application/json', $parsers)) {
+            // Make sure the body wasn't already retrieved (incorrectly)
+            $bodyParams = Craft::$app->getRequest()->getBodyParams();
+            if($bodyParams !== null && empty($bodyParams)) {
+                Craft::$app->getRequest()->setBodyParams(null);
+            }
+
+            Craft::$app->getRequest()->parsers = array_merge(
+                $parsers,
+                [
+                    'application/json' => JsonParser::class
+                ]
+            );
+        }
     }
 
     /**
