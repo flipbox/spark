@@ -1,9 +1,12 @@
 Changelog
 =========
-## Unreleased
+## [1.0.0-beta.6] - 2017-11-19
 ### Added
 - Model query class that returns models 
-- Object query class that returns objects 
+- Object query class that returns objects
+
+### Fixed
+- References of yii\base\Object to yii\base\BaseObject
 
 ## [1.0.0-beta.5] - 2017-09-22
 ### Fixed

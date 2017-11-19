@@ -8,13 +8,13 @@
 
 namespace flipbox\spark\objects;
 
-use yii\base\Object;
+use yii\base\BaseObject;
 
 /**
  * @author Flipbox Factory <hello@flipboxfactory.com>
  * @since 1.0.0
  */
-class ObjectWithHandle extends Object
+class ObjectWithHandle extends BaseObject
 {
 
     use traits\ObjectWithHandle;

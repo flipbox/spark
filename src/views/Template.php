@@ -10,13 +10,13 @@ namespace flipbox\spark\views;
 
 use Craft;
 use craft\web\View;
-use yii\base\Object;
+use yii\base\BaseObject;
 
 /**
  * @author Flipbox Factory <hello@flipboxfactory.com>
  * @since 1.0.0
  */
-class Template extends Object implements ViewInterface
+class Template extends BaseObject implements ViewInterface
 {
 
     /**

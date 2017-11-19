@@ -13,7 +13,7 @@ use flipbox\spark\exceptions\RecordNotFoundException;
 use flipbox\spark\objects\ObjectWithId;
 use flipbox\spark\records\Record;
 use flipbox\spark\records\RecordWithId;
-use yii\base\Object as BaseObject;
+use yii\base\BaseObject;
 
 /**
  * @author Flipbox Factory <hello@flipboxfactory.com>

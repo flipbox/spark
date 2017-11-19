@@ -9,7 +9,7 @@
 namespace flipbox\spark\services;
 
 use flipbox\spark\records\Record;
-use yii\base\Object as BaseObject;
+use yii\base\BaseObject;
 
 /**
  * @author Flipbox Factory <hello@flipboxfactory.com>

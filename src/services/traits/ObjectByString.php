@@ -11,7 +11,7 @@ namespace flipbox\spark\services\traits;
 use flipbox\spark\exceptions\ObjectNotFoundException;
 use flipbox\spark\exceptions\RecordNotFoundException;
 use flipbox\spark\records\Record;
-use yii\base\Object as BaseObject;
+use yii\base\BaseObject;
 
 /**
  * @author Flipbox Factory <hello@flipboxfactory.com>

@@ -11,7 +11,7 @@ namespace flipbox\spark\services;
 use flipbox\spark\objects\ObjectWithId;
 use flipbox\spark\Records\Record;
 use flipbox\spark\records\RecordWithId;
-use yii\base\Object as BaseObject;
+use yii\base\BaseObject;
 
 /**
  * @author Flipbox Factory <hello@flipboxfactory.com>

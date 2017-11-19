@@ -10,7 +10,7 @@ namespace flipbox\spark\helpers;
 
 use craft\helpers\Json as JsonHelper;
 use yii\base\InvalidConfigException;
-use yii\base\Object as BaseObject;
+use yii\base\BaseObject;
 
 /**
  * @author Flipbox Factory <hello@flipboxfactory.com>

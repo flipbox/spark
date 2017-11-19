@@ -17,7 +17,7 @@ use flipbox\spark\helpers\QueryHelper;
 use flipbox\spark\Records\Record;
 use yii\base\Component;
 use yii\base\InvalidConfigException;
-use yii\base\Object as BaseObject;
+use yii\base\BaseObject;
 use yii\db\QueryInterface;
 use Yii;
 
