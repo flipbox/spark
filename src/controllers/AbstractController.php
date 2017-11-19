@@ -31,10 +31,10 @@ abstract class AbstractController extends Controller
 
         // Add json parser (to accept json encoded body)
         $parsers = Craft::$app->getRequest()->parsers;
-        if(!array_key_exists('application/json', $parsers)) {
+        if (!array_key_exists('application/json', $parsers)) {
             // Make sure the body wasn't already retrieved (incorrectly)
             $bodyParams = Craft::$app->getRequest()->getBodyParams();
-            if($bodyParams !== null && empty($bodyParams)) {
+            if ($bodyParams !== null && empty($bodyParams)) {
                 Craft::$app->getRequest()->setBodyParams(null);
             }
 

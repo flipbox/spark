@@ -136,7 +136,7 @@ abstract class Model extends Component
         $model = new $modelClass($record);
 
         // Any eager loaded relations
-        if($relations = $record->getRelatedRecords()) {
+        if ($relations = $record->getRelatedRecords()) {
             $model->setAttributes($relations);
         }
 
@@ -428,7 +428,7 @@ abstract class Model extends Component
     {
         $models = [];
 
-        foreach($records as $index => $record) {
+        foreach ($records as $index => $record) {
             $models[$index] = $this->findByRecord($record, $toScenario);
         }
 
@@ -445,7 +445,7 @@ abstract class Model extends Component
     {
         $models = $this->findAllByRecords($records, $toScenario);
 
-        if(empty($models)) {
+        if (empty($models)) {
             throw new ModelNotFoundException("Unable to get from records.");
         }
 

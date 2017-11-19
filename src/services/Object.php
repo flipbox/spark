@@ -421,7 +421,7 @@ abstract class Object extends Component
     {
         $models = [];
 
-        foreach($records as $index => $record) {
+        foreach ($records as $index => $record) {
             $models[$index] = $this->findByRecord($record, $toScenario);
         }
 
@@ -438,7 +438,7 @@ abstract class Object extends Component
     {
         $models = $this->findAllByRecords($records, $toScenario);
 
-        if(empty($models)) {
+        if (empty($models)) {
             throw new ObjectNotFoundException("Unable to get from records.");
         }
 
