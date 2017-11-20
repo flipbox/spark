@@ -11,7 +11,7 @@ namespace flipbox\spark\db;
 use flipbox\spark\services\Object;
 use yii\base\InvalidConfigException;
 use yii\db\ActiveQuery;
-use yii\base\Object as BaseObject;
+use yii\base\BaseObject;
 
 /**
  * @author Flipbox Factory <hello@flipboxfactory.com>
