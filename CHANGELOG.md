@@ -1,5 +1,9 @@
 Changelog
 =========
+## [1.0.0-beta.7] - 2017-11-19
+### Changed
+- Removed strictness for 'getQuery' on object/model services
+
 ## [1.0.0-beta.6] - 2017-11-19
 ### Added
 - Model query class that returns models 
