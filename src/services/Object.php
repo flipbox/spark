@@ -19,6 +19,7 @@ use yii\base\Component;
 use yii\base\InvalidConfigException;
 use yii\base\BaseObject;
 use yii\db\QueryInterface;
+
 use Yii;
 
 /**
@@ -60,7 +61,7 @@ abstract class Object extends Component
      * @param array $config
      * @return ActiveObjectQuery
      */
-    public function getQuery($config = []): ActiveObjectQuery
+    public function getQuery($config = [])
     {
         /** @var ActiveObjectQuery $query */
         $query = Yii::createObject(

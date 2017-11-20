@@ -61,7 +61,7 @@ abstract class Model extends Component
      * @param array $config
      * @return ActiveModelQuery
      */
-    public function getQuery($config = []): ActiveModelQuery
+    public function getQuery($config = [])
     {
         /** @var ActiveModelQuery $query */
         $query = Yii::createObject(
