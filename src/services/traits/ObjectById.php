@@ -24,7 +24,7 @@ use yii\base\BaseObject;
 trait ObjectById
 {
 
-    use Object;
+    use SparkObject;
 
     /**
      * @var BaseObject[]

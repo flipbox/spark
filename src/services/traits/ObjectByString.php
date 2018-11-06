@@ -20,7 +20,7 @@ use yii\base\BaseObject;
 trait ObjectByString
 {
 
-    use Object;
+    use SparkObject;
 
     /**
      * @var BaseObject[]

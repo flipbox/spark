@@ -18,7 +18,7 @@ use flipbox\spark\records\Record;
 trait Model
 {
 
-    use Object;
+    use SparkObject;
 
     /*******************************************
      * Model -to- Record

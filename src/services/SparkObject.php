@@ -26,10 +26,10 @@ use Yii;
  * @author Flipbox Factory <hello@flipboxfactory.com>
  * @since 1.0.0
  */
-abstract class Object extends Component
+abstract class SparkObject extends Component
 {
 
-    use traits\Object;
+    use traits\SparkObject;
 
     /**
      * @var BaseObject[]

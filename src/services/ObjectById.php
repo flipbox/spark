@@ -17,7 +17,7 @@ use yii\base\BaseObject;
  * @author Flipbox Factory <hello@flipboxfactory.com>
  * @since 2.0.0
  */
-abstract class ObjectById extends Object
+abstract class ObjectById extends SparkObject
 {
 
     use traits\ObjectById;

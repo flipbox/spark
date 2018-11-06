@@ -19,7 +19,7 @@ use flipbox\spark\records\Record;
 trait Element
 {
 
-    use Object;
+    use SparkObject;
 
     /*******************************************
      * ELEMENT -to- RECORD
